@@ -24,30 +24,29 @@ export class AuthEntity extends BaseEntity implements IAuth {
   @Column({ type: "bigint" })
   public refreshTokenExpiresAt: number;
 
-  public accessToken: string;
-
-  public accessTokenExpiresAt: number;
-
   @JoinColumn()
   @OneToOne(_type => UserEntity)
   public user: UserEntity;
 
-  @Column({ type: "timestamptz" })
-  public timeCreatedAt: string;
+  @Column({ type: "int" })
+  public userId: number;
 
   @Column({ type: "timestamptz" })
-  public timeUpdatedAt: string;
+  public createdAt: string;
+
+  @Column({ type: "timestamptz" })
+  public updatedAt: string;
 
   @BeforeInsert()
   public beforeInsert(): void {
     const date = new Date();
-    this.timeCreatedAt = date.toISOString();
-    this.timeUpdatedAt = date.toISOString();
+    this.createdAt = date.toISOString();
+    this.updatedAt = date.toISOString();
   }
 
   @BeforeUpdate()
   public beforeUpdate(): void {
     const date = new Date();
-    this.timeUpdatedAt = date.toISOString();
+    this.updatedAt = date.toISOString();
   }
 }

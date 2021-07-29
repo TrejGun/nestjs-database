@@ -2,11 +2,7 @@ import { Column, DataType, Model, Table } from "sequelize-typescript";
 
 import { ns } from "../common/constants";
 import { UserModel } from "../user/user.model";
-
-export interface IAuth {
-  refreshToken?: string;
-  refreshTokenExpiresAt?: number;
-}
+import { IAuth } from "./interfaces";
 
 @Table({
   schema: ns,

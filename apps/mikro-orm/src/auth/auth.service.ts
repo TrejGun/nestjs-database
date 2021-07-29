@@ -2,15 +2,15 @@ import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { InjectRepository } from "@mikro-orm/nestjs";
 import { EntityRepository } from "@mikro-orm/postgresql";
-
+import { FilterQuery } from "@mikro-orm/core";
 import { v4 } from "uuid";
 
+import { IJwt } from "../common/jwt";
 import { UserService } from "../user/user.service";
 import { UserEntity } from "../user/user.entity";
-import { IAuth, ILoginFields } from "./interfaces";
+import { ILoginFields } from "./interfaces";
 import { AuthEntity } from "./auth.entity";
 import { accessTokenExpiresIn, refreshTokenExpiresIn } from "./auth.constants";
-import { FilterQuery } from "@mikro-orm/core";
 
 @Injectable()
 export class AuthService {
@@ -21,7 +21,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  public async login(data: ILoginFields): Promise<IAuth> {
+  public async login(data: ILoginFields): Promise<IJwt> {
     const user = await this.userService.getByCredentials(data.email, data.password);
 
     if (!user) {
@@ -35,7 +35,7 @@ export class AuthService {
     return this.authEntityRepository.nativeDelete(where);
   }
 
-  public async refresh(where: FilterQuery<AuthEntity>): Promise<IAuth> {
+  public async refresh(where: FilterQuery<AuthEntity>): Promise<IJwt> {
     const authEntity = await this.authEntityRepository.findOne(where, ["user"]);
 
     if (!authEntity || authEntity.refreshTokenExpiresAt < new Date().getTime()) {
@@ -45,7 +45,7 @@ export class AuthService {
     return this.loginUser(authEntity.user);
   }
 
-  public async loginUser(user: UserEntity): Promise<IAuth> {
+  public async loginUser(user: UserEntity): Promise<IJwt> {
     const refreshToken = v4();
     const date = new Date();
 

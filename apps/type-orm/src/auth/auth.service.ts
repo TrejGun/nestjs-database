@@ -4,9 +4,10 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository, FindConditions, DeleteResult } from "typeorm";
 import { v4 } from "uuid";
 
+import { IJwt } from "../common/jwt";
 import { UserService } from "../user/user.service";
 import { UserEntity } from "../user/user.entity";
-import { IAuth, ILoginDto } from "./interfaces";
+import { ILoginDto } from "./interfaces";
 import { AuthEntity } from "./auth.entity";
 import { accessTokenExpiresIn, refreshTokenExpiresIn } from "./auth.constants";
 
@@ -19,7 +20,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  public async login(data: ILoginDto): Promise<IAuth> {
+  public async login(data: ILoginDto): Promise<IJwt> {
     const userEntity = await this.userService.getByCredentials(data.email, data.password);
 
     if (!userEntity) {
@@ -37,7 +38,7 @@ export class AuthService {
     return this.authEntityRepository.delete(where);
   }
 
-  public async refresh(where: FindConditions<AuthEntity>): Promise<IAuth> {
+  public async refresh(where: FindConditions<AuthEntity>): Promise<IJwt> {
     const authEntity = await this.authEntityRepository.findOne({ where, relations: ["user"] });
 
     if (!authEntity || authEntity.refreshTokenExpiresAt < new Date().getTime()) {
@@ -47,7 +48,7 @@ export class AuthService {
     return this.loginUser(authEntity.user);
   }
 
-  public async loginUser(user: UserEntity): Promise<IAuth> {
+  public async loginUser(user: UserEntity): Promise<IJwt> {
     const refreshToken = v4();
     const date = new Date();
 

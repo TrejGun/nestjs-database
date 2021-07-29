@@ -8,7 +8,7 @@ export class Migration20210720063728 extends Migration {
     );
 
     this.addSql(
-      'create table "auth" ("id" serial primary key, "refresh_token" varchar not null, "refresh_token_expires_at" bigint not null, "user_id" int4 not null, "time_created_at" timestamptz(0) not null, "time_updated_at" timestamptz(0) not null);',
+      'create table "auth" ("id" serial primary key, "refresh_token" varchar not null, "refresh_token_expires_at" bigint not null, "user_id" int4 not null, "created_at" timestamptz(0) not null, "updated_at" timestamptz(0) not null);',
     );
 
     this.addSql(

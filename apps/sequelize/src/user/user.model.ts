@@ -1,15 +1,7 @@
-import { Column, Model, Table, DataType } from "sequelize-typescript";
+import { Column, DataType, Model, Table } from "sequelize-typescript";
 
-import { IUserCreateDto } from "./interfaces";
+import { IUser, IUserCreateDto } from "./interfaces";
 import { ns } from "../common/constants";
-
-export interface IUser {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-}
 
 @Table({
   schema: ns,

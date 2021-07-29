@@ -9,24 +9,20 @@ export class AuthEntity {
   [EntityRepositoryType]?: IAuth;
 
   @PrimaryKey()
-  id: number;
+  public id: number;
 
   @Property({ columnType: "varchar" })
-  refreshToken: string;
+  public refreshToken: string;
 
   @Property({ columnType: "bigint" })
-  refreshTokenExpiresAt: number;
-
-  accessToken: string;
-
-  accessTokenExpiresAt: number;
+  public refreshTokenExpiresAt: number;
 
   @ManyToOne()
-  user: UserEntity;
+  public user: UserEntity;
 
   @Property()
-  timeCreatedAt = new Date();
+  public createdAt = new Date();
 
   @Property({ onUpdate: () => new Date() })
-  timeUpdatedAt = new Date();
+  public updatedAt = new Date();
 }

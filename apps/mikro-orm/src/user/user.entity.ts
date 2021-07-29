@@ -8,14 +8,14 @@ export class UserEntity {
   [EntityRepositoryType]?: IUser;
 
   @PrimaryKey()
-  id: number;
+  public id: number;
 
   @Property({ columnType: "varchar" })
-  email: string;
+  public email: string;
 
   @Property({ columnType: "varchar", hidden: true })
-  password?: string;
+  public password?: string;
 
   @Enum({ items: () => UserRole, array: true, default: [UserRole.User] })
-  roles: Array<UserRole>;
+  public roles: Array<UserRole>;
 }
