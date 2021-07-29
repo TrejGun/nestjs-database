@@ -1,19 +1,20 @@
-import {Entity, PrimaryKey, Property, ManyToOne, EntityRepositoryType} from "@mikro-orm/core";
+import { Entity, PrimaryKey, Property, ManyToOne, EntityRepositoryType } from "@mikro-orm/core";
 
-import {UserEntity} from "../user/user.entity";
-import {IAuth} from "./interfaces";
+import { UserEntity } from "../user/user.entity";
+import { ns } from "../common/constants";
+import { IAuth } from "./interfaces";
 
-@Entity({tableName: "test1.auth"})
+@Entity({ tableName: `${ns}.auth` })
 export class AuthEntity {
   [EntityRepositoryType]?: IAuth;
 
   @PrimaryKey()
   id: number;
 
-  @Property({columnType: "varchar"})
+  @Property({ columnType: "varchar" })
   refreshToken: string;
 
-  @Property({columnType: "bigint"})
+  @Property({ columnType: "bigint" })
   refreshTokenExpiresAt: number;
 
   accessToken: string;
@@ -26,6 +27,6 @@ export class AuthEntity {
   @Property()
   timeCreatedAt = new Date();
 
-  @Property({onUpdate: () => new Date()})
+  @Property({ onUpdate: () => new Date() })
   timeUpdatedAt = new Date();
 }

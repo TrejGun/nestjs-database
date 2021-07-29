@@ -8,18 +8,20 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import {UserEntity} from "../user/user.entity";
-import {IAuth} from "./interfaces";
 
-@Entity({schema: "test", name: "auth"})
+import { UserEntity } from "../user/user.entity";
+import { IAuth } from "./interfaces";
+import { ns } from "../common/constants";
+
+@Entity({ schema: ns, name: "auth" })
 export class AuthEntity extends BaseEntity implements IAuth {
   @PrimaryGeneratedColumn()
   public id: number;
 
-  @Column({type: "varchar"})
+  @Column({ type: "varchar" })
   public refreshToken: string;
 
-  @Column({type: "bigint"})
+  @Column({ type: "bigint" })
   public refreshTokenExpiresAt: number;
 
   public accessToken: string;
@@ -30,10 +32,10 @@ export class AuthEntity extends BaseEntity implements IAuth {
   @OneToOne(_type => UserEntity)
   public user: UserEntity;
 
-  @Column({type: "timestamptz"})
+  @Column({ type: "timestamptz" })
   public timeCreatedAt: string;
 
-  @Column({type: "timestamptz"})
+  @Column({ type: "timestamptz" })
   public timeUpdatedAt: string;
 
   @BeforeInsert()
