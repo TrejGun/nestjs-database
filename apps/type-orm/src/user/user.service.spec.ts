@@ -1,22 +1,16 @@
-import {Test, TestingModule} from "@nestjs/testing";
-import {TypeOrmModule} from "@nestjs/typeorm";
+import { Test, TestingModule } from "@nestjs/testing";
+import { TypeOrmModule } from "@nestjs/typeorm";
 
-import {UserService} from "./user.service";
-import {UserEntity} from "./user.entity";
-import {TypeOrmConfigService} from "../typeorm.options";
+import { DatabaseModule } from "../database/database.module";
+import { UserService } from "./user.service";
+import { UserEntity } from "./user.entity";
 
-
-describe("userService", () => {
+describe("UserService", () => {
   let service: UserService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [
-        TypeOrmModule.forRootAsync({
-          useClass: TypeOrmConfigService,
-        }),
-        TypeOrmModule.forFeature([UserEntity]),
-      ],
+      imports: [DatabaseModule, TypeOrmModule.forFeature([UserEntity])],
       providers: [UserService],
     }).compile();
 

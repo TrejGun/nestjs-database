@@ -1,13 +1,13 @@
-import {Module} from "@nestjs/common";
-import {TypeOrmModule} from "@nestjs/typeorm";
-import {APP_GUARD, APP_PIPE} from "@nestjs/core";
+import { Module } from "@nestjs/common";
+import { APP_GUARD, APP_PIPE } from "@nestjs/core";
+import { ConfigModule } from "@nestjs/config";
 
-import {JwtGuard, RolesGuard} from "./common/guards";
-import {CustomValidationPipe} from "./common/pipes";
-import {TypeOrmConfigService} from "./typeorm.options";
+import { JwtGuard, RolesGuard } from "./common/guards";
+import { CustomValidationPipe } from "./common/pipes";
 
-import {AuthModule} from "./auth/auth.module";
-import {UserModule} from "./user/user.module";
+import { AuthModule } from "./auth/auth.module";
+import { UserModule } from "./user/user.module";
+import { DatabaseModule } from "./database/database.module";
 
 @Module({
   providers: [
@@ -25,9 +25,10 @@ import {UserModule} from "./user/user.module";
     },
   ],
   imports: [
-    TypeOrmModule.forRootAsync({
-      useClass: TypeOrmConfigService,
+    ConfigModule.forRoot({
+      envFilePath: ".env",
     }),
+    DatabaseModule,
     AuthModule,
     UserModule,
   ],

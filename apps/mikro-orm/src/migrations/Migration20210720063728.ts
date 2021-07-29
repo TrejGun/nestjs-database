@@ -1,4 +1,4 @@
-import {Migration} from "@mikro-orm/migrations";
+import { Migration } from "@mikro-orm/migrations";
 
 export class Migration20210720063728 extends Migration {
   // eslint-disable-next-line @typescript-eslint/require-await

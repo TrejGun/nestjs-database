@@ -1,11 +1,11 @@
-import {createHash} from "crypto";
-import {Repository, FindConditions} from "typeorm";
+import { createHash } from "crypto";
+import { Repository, FindConditions } from "typeorm";
 
-import {Injectable, ConflictException} from "@nestjs/common";
-import {InjectRepository} from "@nestjs/typeorm";
+import { Injectable, ConflictException } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
 
-import {UserEntity} from "./user.entity";
-import {IUserCreateFields} from "./interfaces";
+import { UserEntity } from "./user.entity";
+import { IUserCreateDto } from "./interfaces";
 
 @Injectable()
 export class UserService {
@@ -15,7 +15,7 @@ export class UserService {
   ) {}
 
   public findOne(where: FindConditions<UserEntity>): Promise<UserEntity | undefined> {
-    return this.userEntityRepository.findOne({where});
+    return this.userEntityRepository.findOne({ where });
   }
 
   public findAndCount(): Promise<[UserEntity[], number]> {
@@ -31,8 +31,8 @@ export class UserService {
     });
   }
 
-  public async create(data: IUserCreateFields): Promise<UserEntity> {
-    let user = await this.findOne({email: data.email});
+  public async create(data: IUserCreateDto): Promise<UserEntity> {
+    let user = await this.findOne({ email: data.email });
 
     if (user) {
       throw new ConflictException();
@@ -45,15 +45,10 @@ export class UserService {
       })
       .save();
 
-    delete user.password;
-
     return user;
   }
 
   private createPasswordHash(password: string, salt: string): string {
-    return createHash("sha256")
-      .update(password)
-      .update(salt)
-      .digest("hex");
+    return createHash("sha256").update(password).update(salt).digest("hex");
   }
 }

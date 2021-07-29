@@ -1,14 +1,14 @@
-import {Module} from "@nestjs/common";
-import {PassportModule} from "@nestjs/passport";
-import {JwtModule} from "@nestjs/jwt";
+import { Module } from "@nestjs/common";
+import { PassportModule } from "@nestjs/passport";
+import { JwtModule } from "@nestjs/jwt";
 // import {TypeOrmModule} from "@nestjs/typeorm";
 
-import {AuthService} from "./auth.service";
-import {AuthEntity} from "./auth.entity";
-import {UserModule} from "../user/user.module";
-import {AuthJwtController} from "./auth.jwt.controller";
-import {JwtStrategy} from "./strategies";
-import {MikroOrmModule} from "@mikro-orm/nestjs";
+import { AuthService } from "./auth.service";
+import { AuthEntity } from "./auth.entity";
+import { UserModule } from "../user/user.module";
+import { AuthJwtController } from "./auth.jwt.controller";
+import { JwtStrategy } from "./strategies";
+import { MikroOrmModule } from "@mikro-orm/nestjs";
 
 @Module({
   imports: [

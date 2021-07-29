@@ -1,16 +1,16 @@
-import {Injectable, UnauthorizedException} from "@nestjs/common";
-import {JwtService} from "@nestjs/jwt";
-import {InjectRepository} from "@mikro-orm/nestjs";
-import {EntityRepository} from "@mikro-orm/postgresql";
+import { Injectable, UnauthorizedException } from "@nestjs/common";
+import { JwtService } from "@nestjs/jwt";
+import { InjectRepository } from "@mikro-orm/nestjs";
+import { EntityRepository } from "@mikro-orm/postgresql";
 
-import {v4} from "uuid";
+import { v4 } from "uuid";
 
-import {UserService} from "../user/user.service";
-import {UserEntity} from "../user/user.entity";
-import {IAuth, ILoginFields} from "./interfaces";
-import {AuthEntity} from "./auth.entity";
-import {accessTokenExpiresIn, refreshTokenExpiresIn} from "./auth.constants";
-import {FilterQuery} from "@mikro-orm/core";
+import { UserService } from "../user/user.service";
+import { UserEntity } from "../user/user.entity";
+import { IAuth, ILoginFields } from "./interfaces";
+import { AuthEntity } from "./auth.entity";
+import { accessTokenExpiresIn, refreshTokenExpiresIn } from "./auth.constants";
+import { FilterQuery } from "@mikro-orm/core";
 
 @Injectable()
 export class AuthService {
@@ -58,7 +58,7 @@ export class AuthService {
     await this.authEntityRepository.nativeInsert(loginUser);
 
     return {
-      accessToken: this.jwtService.sign({email: user.email}, {expiresIn: accessTokenExpiresIn / 1000}),
+      accessToken: this.jwtService.sign({ email: user.email }, { expiresIn: accessTokenExpiresIn / 1000 }),
       refreshToken: refreshToken,
       accessTokenExpiresAt: date.getTime() + accessTokenExpiresIn,
       refreshTokenExpiresAt: date.getTime() + refreshTokenExpiresIn,

@@ -1,9 +1,9 @@
-import {Options, UnderscoreNamingStrategy} from "@mikro-orm/core";
-import {SqlHighlighter} from "@mikro-orm/sql-highlighter";
-import {TsMorphMetadataProvider} from "@mikro-orm/reflection";
-import {Migration20210720063728} from "./migrations/Migration20210720063728";
-import {UserEntity} from "./user/user.entity";
-import {AuthEntity} from "./auth/auth.entity";
+import { Options, UnderscoreNamingStrategy } from "@mikro-orm/core";
+import { SqlHighlighter } from "@mikro-orm/sql-highlighter";
+import { TsMorphMetadataProvider } from "@mikro-orm/reflection";
+import { Migration20210720063728 } from "./migrations/Migration20210720063728";
+import { UserEntity } from "./user/user.entity";
+import { AuthEntity } from "./auth/auth.entity";
 
 const config: Options = {
   type: "postgresql",

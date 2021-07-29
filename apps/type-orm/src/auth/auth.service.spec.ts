@@ -1,14 +1,14 @@
-import {Test, TestingModule} from "@nestjs/testing";
-import {TypeOrmModule} from "@nestjs/typeorm";
-import {PassportModule} from "@nestjs/passport";
-import {JwtModule} from "@nestjs/jwt";
+import { Test, TestingModule } from "@nestjs/testing";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { PassportModule } from "@nestjs/passport";
+import { JwtModule } from "@nestjs/jwt";
+import { ConfigModule } from "@nestjs/config";
 
-import {AuthService} from "./auth.service";
-import {JwtStrategy} from "./strategies";
-import {UserModule} from "../user/user.module";
-import {AuthEntity} from "./auth.entity";
-import {TypeOrmConfigService} from "../typeorm.options";
-
+import { AuthService } from "./auth.service";
+import { JwtStrategy } from "./strategies";
+import { UserModule } from "../user/user.module";
+import { AuthEntity } from "./auth.entity";
+import { DatabaseModule } from "../database/database.module";
 
 describe("AuthService", () => {
   let service: AuthService;
@@ -16,9 +16,10 @@ describe("AuthService", () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
-        TypeOrmModule.forRootAsync({
-          useClass: TypeOrmConfigService,
+        ConfigModule.forRoot({
+          envFilePath: ".env",
         }),
+        DatabaseModule,
         TypeOrmModule.forFeature([AuthEntity]),
         UserModule,
         PassportModule,

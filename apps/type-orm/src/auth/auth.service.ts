@@ -1,14 +1,14 @@
-import {Injectable, UnauthorizedException} from "@nestjs/common";
-import {JwtService} from "@nestjs/jwt";
-import {InjectRepository} from "@nestjs/typeorm";
-import {Repository, FindConditions, DeleteResult} from "typeorm";
-import {v4} from "uuid";
+import { Injectable, UnauthorizedException } from "@nestjs/common";
+import { JwtService } from "@nestjs/jwt";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository, FindConditions, DeleteResult } from "typeorm";
+import { v4 } from "uuid";
 
-import {UserService} from "../user/user.service";
-import {UserEntity} from "../user/user.entity";
-import {IAuth, ILoginFields} from "./interfaces";
-import {AuthEntity} from "./auth.entity";
-import {accessTokenExpiresIn, refreshTokenExpiresIn} from "./auth.constants";
+import { UserService } from "../user/user.service";
+import { UserEntity } from "../user/user.entity";
+import { IAuth, ILoginDto } from "./interfaces";
+import { AuthEntity } from "./auth.entity";
+import { accessTokenExpiresIn, refreshTokenExpiresIn } from "./auth.constants";
 
 @Injectable()
 export class AuthService {
@@ -19,14 +19,18 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  public async login(data: ILoginFields): Promise<IAuth> {
-    const user = await this.userService.getByCredentials(data.email, data.password);
+  public async login(data: ILoginDto): Promise<IAuth> {
+    const userEntity = await this.userService.getByCredentials(data.email, data.password);
 
-    if (!user) {
+    if (!userEntity) {
       throw new UnauthorizedException();
     }
 
-    return this.loginUser(user);
+    return this.loginUser(userEntity);
+  }
+
+  public async logout(where: FindConditions<AuthEntity>): Promise<DeleteResult> {
+    return this.authEntityRepository.delete(where);
   }
 
   public async delete(where: FindConditions<AuthEntity>): Promise<DeleteResult> {
@@ -34,7 +38,7 @@ export class AuthService {
   }
 
   public async refresh(where: FindConditions<AuthEntity>): Promise<IAuth> {
-    const authEntity = await this.authEntityRepository.findOne({where, relations: ["user"]});
+    const authEntity = await this.authEntityRepository.findOne({ where, relations: ["user"] });
 
     if (!authEntity || authEntity.refreshTokenExpiresAt < new Date().getTime()) {
       throw new UnauthorizedException();
@@ -56,7 +60,7 @@ export class AuthService {
       .save();
 
     return {
-      accessToken: this.jwtService.sign({email: user.email}, {expiresIn: accessTokenExpiresIn / 1000}),
+      accessToken: this.jwtService.sign({ email: user.email }, { expiresIn: accessTokenExpiresIn / 1000 }),
       refreshToken: refreshToken,
       accessTokenExpiresAt: date.getTime() + accessTokenExpiresIn,
       refreshTokenExpiresAt: date.getTime() + refreshTokenExpiresIn,

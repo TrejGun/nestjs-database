@@ -3,16 +3,18 @@ import { ConfigModule } from "@nestjs/config";
 
 import { DatabaseModule } from "./database/database.module";
 import { HealthModule } from "./health/health.module";
-import { UsersModule } from "./user/user.module";
+import { UserModule } from "./user/user.module";
+import { AuthModule } from "./auth/auth.module";
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: `.env.${process.env.NODE_ENV as string}`,
+      envFilePath: `.env`,
     }),
     DatabaseModule,
     HealthModule,
-    UsersModule,
+    AuthModule,
+    UserModule,
   ],
 })
 export class AppModule {}

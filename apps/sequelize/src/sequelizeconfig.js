@@ -1,7 +1,7 @@
 import { config } from "dotenv";
 
 config({
-  path: `.env.${process.env.NODE_ENV}`,
+  path: `.env`,
 });
 
 export default {
@@ -14,4 +14,3 @@ export default {
     dialect: "postgres",
   },
 };
-

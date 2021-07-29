@@ -1,11 +1,11 @@
-import {createHash} from "crypto";
-import {EntityRepository} from "@mikro-orm/postgresql";
-import {Injectable, ConflictException} from "@nestjs/common";
-import {InjectRepository} from "@mikro-orm/nestjs";
-import {FilterQuery} from "@mikro-orm/core";
+import { createHash } from "crypto";
+import { EntityRepository } from "@mikro-orm/postgresql";
+import { Injectable, ConflictException } from "@nestjs/common";
+import { InjectRepository } from "@mikro-orm/nestjs";
+import { FilterQuery } from "@mikro-orm/core";
 
-import {UserEntity} from "./user.entity";
-import {IUserCreateFields} from "./interfaces";
+import { UserEntity } from "./user.entity";
+import { IUserCreateDto } from "./interfaces";
 
 @Injectable()
 export class UserService {
@@ -29,8 +29,8 @@ export class UserService {
     });
   }
 
-  public async create(data: IUserCreateFields): Promise<UserEntity> {
-    let user = await this.findOne({email: data.email});
+  public async create(data: IUserCreateDto): Promise<UserEntity> {
+    let user = await this.findOne({ email: data.email });
 
     if (user) {
       throw new ConflictException();
@@ -42,8 +42,6 @@ export class UserService {
     });
 
     user.id = await this.userEntityRepository.nativeInsert(user);
-
-    delete user.password;
 
     return user;
   }

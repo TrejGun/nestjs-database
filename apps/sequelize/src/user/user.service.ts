@@ -4,6 +4,7 @@ import { InjectModel } from "@nestjs/sequelize";
 import { IUser, UserModel } from "./user.model";
 import { IUserCreateDto } from "./interfaces";
 import { WhereOptions } from "sequelize";
+import { createHash } from "crypto";
 
 @Injectable()
 export class UserService {
@@ -32,5 +33,18 @@ export class UserService {
     userModel = await this.userModel.build(dto).save();
 
     return userModel;
+  }
+
+  public async getByCredentials(email: string, password: string): Promise<UserModel | null> {
+    return this.userModel.findOne({
+      where: {
+        email,
+        password: this.createPasswordHash(password, email),
+      },
+    });
+  }
+
+  private createPasswordHash(password: string, salt: string): string {
+    return createHash("sha256").update(password).update(salt).digest("hex");
   }
 }

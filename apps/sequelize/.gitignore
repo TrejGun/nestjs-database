@@ -34,5 +34,5 @@ package-lock.json
 !.vscode/launch.json
 !.vscode/extensions.json
 
-.env.*
-!.env.sample
+.env
+!.env

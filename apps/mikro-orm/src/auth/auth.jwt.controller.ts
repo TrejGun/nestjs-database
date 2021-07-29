@@ -1,11 +1,11 @@
-import {Body, Controller, Get, Post} from "@nestjs/common";
+import { Body, Controller, Get, Post } from "@nestjs/common";
 
-import {AuthService} from "./auth.service";
-import {UserService} from "../user/user.service";
-import {IAuth} from "./interfaces";
-import {Public} from "../common/decorators";
-import {JwtLogoutSchema, JwtRefreshTokenSchema, LoginSchema} from "./schemas";
-import {UserCreateSchema} from "../user/schemas";
+import { AuthService } from "./auth.service";
+import { UserService } from "../user/user.service";
+import { IAuth } from "./interfaces";
+import { Public } from "../common/decorators";
+import { JwtLogoutSchema, JwtRefreshTokenSchema, LoginSchema } from "./dto";
+import { UserCreateDto } from "../user/dto";
 
 @Controller("/auth")
 export class AuthJwtController {
@@ -32,7 +32,7 @@ export class AuthJwtController {
 
   @Public()
   @Get("signup")
-  public async signup(@Body() data: UserCreateSchema): Promise<IAuth> {
+  public async signup(@Body() data: UserCreateDto): Promise<IAuth> {
     const user = await this.userService.create(data);
     return this.authService.loginUser(user);
   }
