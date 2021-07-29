@@ -17,5 +17,5 @@ export class UserEntity {
   password?: string;
 
   @Enum({ items: () => UserRole, array: true, default: [UserRole.User] })
-  roles: UserRole[] = [UserRole.User];
+  roles: Array<UserRole>;
 }

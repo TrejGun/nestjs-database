@@ -18,7 +18,7 @@ export class UserService {
     return this.userEntityRepository.findOne(where);
   }
 
-  public findAndCount(where: FilterQuery<UserEntity> = {}): Promise<[UserEntity[], number]> {
+  public findAndCount(where: FilterQuery<UserEntity> = {}): Promise<[Array<UserEntity>, number]> {
     return this.userEntityRepository.findAndCount(where);
   }
 
