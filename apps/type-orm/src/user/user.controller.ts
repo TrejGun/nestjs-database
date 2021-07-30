@@ -10,7 +10,7 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get("/profile")
-  getGloballyProtectedProfile(@User() user: UserEntity): UserEntity {
+  public profile(@User() user: UserEntity): UserEntity {
     return user;
   }
 

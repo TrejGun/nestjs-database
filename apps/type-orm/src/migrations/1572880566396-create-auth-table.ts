@@ -36,7 +36,7 @@ export class CreateAuthTable1572880566396 implements MigrationInterface {
         {
           columnNames: ["user_id"],
           referencedColumnNames: ["id"],
-          referencedTableName: "test.user",
+          referencedTableName: `${ns}.user`,
           onDelete: "CASCADE",
         },
       ],
@@ -49,16 +49,16 @@ export class CreateAuthTable1572880566396 implements MigrationInterface {
       LANGUAGE plpgsql
       AS $$
         BEGIN
-          DELETE FROM test.auth WHERE created_at < NOW() - INTERVAL '30 days';
+          DELETE FROM ${ns}.auth WHERE created_at < NOW() - INTERVAL '30 days';
           RETURN NEW;
         END;
       $$;
     `);
 
     await queryRunner.query(`
-      DROP TRIGGER IF EXISTS delete_expired_tokens_trigger ON test.auth;
+      DROP TRIGGER IF EXISTS delete_expired_tokens_trigger ON ${ns}.auth;
       CREATE TRIGGER delete_expired_tokens_trigger
-      AFTER INSERT ON test.auth
+      AFTER INSERT ON ${ns}.auth
       EXECUTE PROCEDURE delete_expired_tokens()
     `);
   }

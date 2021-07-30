@@ -10,6 +10,7 @@ import { UserModule } from "../user/user.module";
 import { AuthJwtController } from "./auth.jwt.controller";
 import { JwtHttpStrategy } from "./strategies";
 import { EmailModule } from "../email/email.module";
+import { TokenModule } from "../token/token.module";
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { EmailModule } from "../email/email.module";
     PassportModule,
     ConfigModule,
     EmailModule,
+    TokenModule,
     JwtModule.register({
       secret: process.env.JWT_SECRET_KEY,
     }),
