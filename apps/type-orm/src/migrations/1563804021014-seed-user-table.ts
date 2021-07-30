@@ -7,11 +7,13 @@ export class SeedUserTable1563804021014 implements MigrationInterface {
       INSERT INTO ${ns}.user (
         email,
         password,
-        roles
+        roles,
+        status
       ) VALUES (
         'trejgun@gmail.com',
-        '6c9311b5a0c96b76e6535d5c57a96d67a405779d2284aaf154148cdcbefc5af6', -- My5up3r5tr0ngP@55w0rd
-        '{ADMIN}'
+        '92f357f4a898825de204b25fffec4a0a1ca486ad1e25643502e33b5ebeefc3ff', -- My5up3r5tr0ngP@55w0rd
+        '{ADMIN}',
+        'ACTIVE'
       );
     `);
   }

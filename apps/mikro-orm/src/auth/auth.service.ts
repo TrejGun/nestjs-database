@@ -17,7 +17,6 @@ import {
   IRestorePasswordDto,
 } from "./interfaces";
 import { AuthEntity } from "./auth.entity";
-import { accessTokenExpiresIn, refreshTokenExpiresIn } from "./auth.constants";
 import { TokenService } from "../token/token.service";
 import { EmailService } from "../email/email.service";
 import { IUserCreateDto, UserStatus } from "../user/interfaces";
@@ -63,6 +62,10 @@ export class AuthService {
   public async loginUser(user: UserEntity): Promise<IJwt> {
     const refreshToken = v4();
     const date = new Date();
+
+    // it is actually a string
+    const accessTokenExpiresIn = ~~this.configService.get<number>("JWT_ACCESS_TOKEN_EXPIRES_IN", 5 * 60);
+    const refreshTokenExpiresIn = ~~this.configService.get<number>("JWT_REFRESH_TOKEN_EXPIRES_IN", 30 * 24 * 60 * 60);
 
     const loginUser = this.authEntityRepository.create({
       user,
@@ -141,7 +144,7 @@ export class AuthService {
     });
 
     // delete token from db
-    await tokenEntity.remove();
+    await this.tokenService.remove(tokenEntity);
   }
 
   public async emailVerification(data: IEmailVerificationDto): Promise<void> {
@@ -154,7 +157,7 @@ export class AuthService {
     await this.userService.activate(tokenEntity.user);
 
     // delete token from db
-    await tokenEntity.remove();
+    await this.tokenService.remove(tokenEntity);
   }
 
   public async resendEmailVerification(data: IResendEmailVerificationDto): Promise<void> {

@@ -45,4 +45,8 @@ export class TokenService {
       return tokenEntity;
     }
   }
+
+  public remove(tokenEntity: TokenEntity): Promise<void> {
+    return this.tokenEntityRepository.remove(tokenEntity).flush();
+  }
 }

@@ -2,7 +2,7 @@ import { Test, TestingModule } from "@nestjs/testing";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { PassportModule } from "@nestjs/passport";
 import { JwtModule } from "@nestjs/jwt";
-import { ConfigModule } from "@nestjs/config";
+import { ConfigModule, ConfigService } from "@nestjs/config";
 
 import { AuthService } from "./auth.service";
 import { JwtHttpStrategy } from "./strategies";
@@ -23,8 +23,12 @@ describe("AuthService", () => {
         TypeOrmModule.forFeature([AuthEntity]),
         UserModule,
         PassportModule,
-        JwtModule.register({
-          secret: process.env.JWT_SECRET_KEY,
+        JwtModule.registerAsync({
+          imports: [ConfigModule],
+          inject: [ConfigService],
+          useFactory: (configService: ConfigService) => ({
+            secret: configService.get<string>("JWT_SECRET_KEY"),
+          }),
         }),
       ],
       providers: [AuthService, JwtHttpStrategy],

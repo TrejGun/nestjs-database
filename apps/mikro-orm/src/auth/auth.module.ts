@@ -1,5 +1,5 @@
 import { Module } from "@nestjs/common";
-import { ConfigModule } from "@nestjs/config";
+import { ConfigModule, ConfigService } from "@nestjs/config";
 import { PassportModule } from "@nestjs/passport";
 import { JwtModule } from "@nestjs/jwt";
 import { MikroOrmModule } from "@mikro-orm/nestjs";
@@ -20,8 +20,12 @@ import { EmailModule } from "../email/email.module";
     TokenModule,
     EmailModule,
     ConfigModule,
-    JwtModule.register({
-      secret: process.env.JWT_SECRET_KEY,
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        secret: configService.get<string>("JWT_SECRET_KEY"),
+      }),
     }),
   ],
   controllers: [AuthJwtController],

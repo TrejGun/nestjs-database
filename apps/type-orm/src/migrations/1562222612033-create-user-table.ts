@@ -40,6 +40,10 @@ export class CreateUserTable1562222612033 implements MigrationInterface {
           type: `${ns}.user_role_enum`,
           isArray: true,
         },
+        {
+          name: "status",
+          type: `${ns}.user_status_enum`,
+        },
       ],
     });
 

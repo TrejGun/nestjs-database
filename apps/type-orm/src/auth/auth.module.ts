@@ -2,7 +2,7 @@ import { Module } from "@nestjs/common";
 import { PassportModule } from "@nestjs/passport";
 import { JwtModule } from "@nestjs/jwt";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { ConfigModule } from "@nestjs/config";
+import { ConfigModule, ConfigService } from "@nestjs/config";
 
 import { AuthService } from "./auth.service";
 import { AuthEntity } from "./auth.entity";
@@ -20,8 +20,12 @@ import { TokenModule } from "../token/token.module";
     ConfigModule,
     EmailModule,
     TokenModule,
-    JwtModule.register({
-      secret: process.env.JWT_SECRET_KEY,
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        secret: configService.get<string>("JWT_SECRET_KEY"),
+      }),
     }),
   ],
   controllers: [AuthJwtController],

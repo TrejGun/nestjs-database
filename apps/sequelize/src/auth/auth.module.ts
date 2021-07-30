@@ -23,7 +23,7 @@ import { TokenModule } from "../token/token.module";
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
-        secret: configService.get<string>("JWT_SECRET_KEY", "keyboard_cat"),
+        secret: configService.get<string>("JWT_SECRET_KEY"),
       }),
     }),
     ConfigModule,
