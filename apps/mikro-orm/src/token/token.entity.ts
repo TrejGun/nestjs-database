@@ -4,7 +4,7 @@ import { ns } from "../common/constants";
 import { IToken, TokenType } from "./interfaces";
 import { UserEntity } from "../user/user.entity";
 
-@Entity({ tableName: `${ns}.token` })
+@Entity({ collection: `${ns}.token` })
 export class TokenEntity {
   [EntityRepositoryType]?: IToken;
 
@@ -15,7 +15,7 @@ export class TokenEntity {
   public code: string;
 
   @Enum({ items: () => TokenType })
-  public tokenType: TokenType;
+  public type: TokenType;
 
   @ManyToOne()
   public user: UserEntity;

@@ -127,7 +127,7 @@ export class AuthService {
   }
 
   public async restorePassword(data: IRestorePasswordDto): Promise<void> {
-    const tokenEntity = await this.tokenService.findOne({ code: data.token, tokenType: TokenType.PASSWORD });
+    const tokenEntity = await this.tokenService.findOne({ code: data.token, type: TokenType.PASSWORD });
 
     if (!tokenEntity) {
       throw new NotFoundException("tokenNotFound");
@@ -147,7 +147,7 @@ export class AuthService {
   }
 
   public async emailVerification(data: IEmailVerificationDto): Promise<void> {
-    const tokenEntity = await this.tokenService.findOne({ code: data.token, tokenType: TokenType.EMAIL });
+    const tokenEntity = await this.tokenService.findOne({ code: data.token, type: TokenType.EMAIL });
 
     if (!tokenEntity) {
       throw new NotFoundException("tokenNotFound");

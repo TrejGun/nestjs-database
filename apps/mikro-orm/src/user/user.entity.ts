@@ -3,12 +3,18 @@ import { Enum, Entity, EntityRepositoryType, PrimaryKey, Property } from "@mikro
 import { ns } from "../common/constants";
 import { IUser, UserRole, UserStatus } from "./interfaces";
 
-@Entity({ tableName: `${ns}.user` })
+@Entity({ collection: `${ns}.user` })
 export class UserEntity {
   [EntityRepositoryType]?: IUser;
 
   @PrimaryKey()
   public id: number;
+
+  @Property({ columnType: "varchar" })
+  public firstName: string;
+
+  @Property({ columnType: "varchar" })
+  public lastName: string;
 
   @Property({ columnType: "varchar" })
   public email: string;
@@ -21,7 +27,7 @@ export class UserEntity {
 
   @Enum({
     items: () => UserStatus,
-    default: [UserStatus.PENDING],
+    default: UserStatus.PENDING,
   })
   public status: UserStatus;
 }

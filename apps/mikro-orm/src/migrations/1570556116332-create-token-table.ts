@@ -15,7 +15,7 @@ export class CreateTokenTable1570556116332 extends Migration {
     this.addSql(
       `create table ${ns}.token (
       id serial primary key,
-      token varchar not null,
+      code varchar not null,
       type ${ns}.token_type_enum not null,
       user_id int not null,
       created_at timestamptz not null default current_timestamp,

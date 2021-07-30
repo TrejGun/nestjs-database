@@ -5,6 +5,14 @@ import { IUserCreateDto } from "../interfaces";
 
 export class UserCreateDto implements IUserCreateDto {
   @ApiProperty()
+  @IsString()
+  public firstName: string;
+
+  @ApiProperty()
+  @IsString()
+  public lastName: string;
+
+  @ApiProperty()
   @IsEmail()
   public email: string;
 

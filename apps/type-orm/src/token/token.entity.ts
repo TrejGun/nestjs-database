@@ -25,7 +25,7 @@ export class TokenEntity extends BaseEntity implements IToken {
     type: "enum",
     enum: TokenType,
   })
-  public tokenType: TokenType;
+  public type: TokenType;
 
   @JoinColumn()
   @OneToOne(_type => UserEntity)

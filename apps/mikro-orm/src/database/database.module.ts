@@ -28,8 +28,6 @@ export class DatabaseModule {
   constructor(private readonly orm: MikroORM) {}
 
   async configure(): Promise<void> {
-    // const generator = this.orm.getSchemaGenerator();
-    // const updateDump = await generator.getUpdateSchemaSQL();
     const migrator = this.orm.getMigrator();
     await migrator.up();
   }

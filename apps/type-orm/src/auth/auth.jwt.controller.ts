@@ -15,23 +15,21 @@ import {
 } from "./dto";
 import { UserCreateDto } from "../user/dto";
 
+@Public()
 @Controller("/auth")
 export class AuthJwtController {
   constructor(private readonly authService: AuthService, private readonly userService: UserService) {}
 
-  @Public()
   @Post("login")
   public login(@Body() data: LoginDto): Promise<IJwt> {
     return this.authService.login(data);
   }
 
-  @Public()
   @Post("refresh")
   async refreshToken(@Body() data: RefreshDto): Promise<IJwt> {
     return this.authService.refresh(data);
   }
 
-  @Public()
   @Post("logout")
   public async logout(@Body() data: JwtLogoutDto): Promise<boolean> {
     await this.authService.logout(data);

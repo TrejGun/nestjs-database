@@ -22,10 +22,10 @@ export class TokenService {
     });
   }
 
-  public async getToken(tokenType: TokenType, userEntity: UserEntity): Promise<TokenEntity> {
+  public async getToken(type: TokenType, userEntity: UserEntity): Promise<TokenEntity> {
     // working around https://github.com/typeorm/typeorm/issues/1090
     let tokenEntity = await this.tokenEntityRepository.findOne({
-      tokenType,
+      type,
       user: userEntity,
     });
 
@@ -36,11 +36,11 @@ export class TokenService {
     } else {
       tokenEntity = this.tokenEntityRepository.create({
         code: randomBytes(3).toString("hex").toUpperCase(),
-        tokenType,
+        type,
         user: userEntity,
       });
 
-      tokenEntity.id = await this.tokenEntityRepository.nativeInsert(userEntity);
+      tokenEntity.id = await this.tokenEntityRepository.nativeInsert(tokenEntity);
 
       return tokenEntity;
     }

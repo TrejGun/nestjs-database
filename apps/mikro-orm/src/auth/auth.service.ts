@@ -36,13 +36,13 @@ export class AuthService {
   ) {}
 
   public async login(data: ILoginDto): Promise<IJwt> {
-    const user = await this.userService.getByCredentials(data.email, data.password);
+    const userEntity = await this.userService.getByCredentials(data.email, data.password);
 
-    if (!user) {
+    if (!userEntity) {
       throw new UnauthorizedException();
     }
 
-    return this.loginUser(user);
+    return this.loginUser(userEntity);
   }
 
   public async logout(where: FilterQuery<AuthEntity>): Promise<number> {
@@ -59,7 +59,7 @@ export class AuthService {
     return this.loginUser(authEntity.user);
   }
 
-  public async loginUser(user: UserEntity): Promise<IJwt> {
+  public async loginUser(userEntity: UserEntity): Promise<IJwt> {
     const refreshToken = v4();
     const date = new Date();
 
@@ -67,16 +67,16 @@ export class AuthService {
     const accessTokenExpiresIn = ~~this.configService.get<number>("JWT_ACCESS_TOKEN_EXPIRES_IN", 5 * 60);
     const refreshTokenExpiresIn = ~~this.configService.get<number>("JWT_REFRESH_TOKEN_EXPIRES_IN", 30 * 24 * 60 * 60);
 
-    const loginUser = this.authEntityRepository.create({
-      user,
+    const authEntity = this.authEntityRepository.create({
+      userId: userEntity.id,
       refreshToken,
       refreshTokenExpiresAt: date.getTime() + refreshTokenExpiresIn,
     });
 
-    await this.authEntityRepository.nativeInsert(loginUser);
+    await this.authEntityRepository.nativeInsert(authEntity);
 
     return {
-      accessToken: this.jwtService.sign({ email: user.email }, { expiresIn: accessTokenExpiresIn / 1000 }),
+      accessToken: this.jwtService.sign({ email: userEntity.email }, { expiresIn: accessTokenExpiresIn / 1000 }),
       refreshToken: refreshToken,
       accessTokenExpiresAt: date.getTime() + accessTokenExpiresIn,
       refreshTokenExpiresAt: date.getTime() + refreshTokenExpiresIn,
@@ -128,7 +128,7 @@ export class AuthService {
   }
 
   public async restorePassword(data: IRestorePasswordDto): Promise<void> {
-    const tokenEntity = await this.tokenService.findOne({ code: data.token, tokenType: TokenType.PASSWORD });
+    const tokenEntity = await this.tokenService.findOne({ code: data.token, type: TokenType.PASSWORD });
 
     if (!tokenEntity) {
       throw new NotFoundException("tokenNotFound");
@@ -148,7 +148,7 @@ export class AuthService {
   }
 
   public async emailVerification(data: IEmailVerificationDto): Promise<void> {
-    const tokenEntity = await this.tokenService.findOne({ code: data.token, tokenType: TokenType.EMAIL });
+    const tokenEntity = await this.tokenService.findOne({ code: data.token, type: TokenType.EMAIL });
 
     if (!tokenEntity) {
       throw new NotFoundException("tokenNotFound");

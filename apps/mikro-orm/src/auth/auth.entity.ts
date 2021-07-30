@@ -4,7 +4,7 @@ import { UserEntity } from "../user/user.entity";
 import { ns } from "../common/constants";
 import { IAuth } from "./interfaces";
 
-@Entity({ tableName: `${ns}.auth` })
+@Entity({ collection: `${ns}.auth` })
 export class AuthEntity {
   [EntityRepositoryType]?: IAuth;
 

@@ -6,7 +6,7 @@ export enum TokenType {
 export interface IToken {
   id: number;
   code: string;
-  tokenType: TokenType;
+  type: TokenType;
   createdAt: string;
   updatedAt: string;
 }

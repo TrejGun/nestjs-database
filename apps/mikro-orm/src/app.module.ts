@@ -1,5 +1,7 @@
 import { Module } from "@nestjs/common";
 import { APP_GUARD, APP_PIPE } from "@nestjs/core";
+import { ConfigModule } from "@nestjs/config";
+
 import { JwtGuard, RolesGuard } from "./common/guards";
 import { CustomValidationPipe } from "./common/pipes";
 import { AuthModule } from "./auth/auth.module";
@@ -21,6 +23,13 @@ import { DatabaseModule } from "./database/database.module";
       useClass: RolesGuard,
     },
   ],
-  imports: [DatabaseModule, AuthModule, UserModule],
+  imports: [
+    ConfigModule.forRoot({
+      envFilePath: ".env",
+    }),
+    DatabaseModule,
+    AuthModule,
+    UserModule,
+  ],
 })
 export class ApplicationModule {}
