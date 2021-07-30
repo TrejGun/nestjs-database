@@ -1,5 +1,5 @@
 import { Column, Model, Table } from "sequelize-typescript";
-import { DataTypes } from "sequelize";
+import { DataTypes, Sequelize } from "sequelize";
 
 import { IUser, IUserCreateDto, UserRole, UserStatus } from "./interfaces";
 import { ns } from "../common/constants";
@@ -38,9 +38,17 @@ export class UserModel extends Model<IUser, IUserCreateDto> implements IUser {
   })
   public status: UserStatus;
 
-  @Column
+  @Column({
+    allowNull: false,
+    defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+    type: DataTypes.DATE,
+  })
   public createdAt: string;
 
-  @Column
+  @Column({
+    allowNull: false,
+    defaultValue: Sequelize.fn("NOW"),
+    type: DataTypes.DATE,
+  })
   public updatedAt: string;
 }

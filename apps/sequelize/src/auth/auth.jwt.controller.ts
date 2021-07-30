@@ -1,4 +1,4 @@
-import { Body, ClassSerializerInterceptor, Controller, Get, HttpCode, Post, UseInterceptors } from "@nestjs/common";
+import { Body, ClassSerializerInterceptor, Controller, HttpCode, Post, UseInterceptors } from "@nestjs/common";
 
 import { Public } from "../common/decorators";
 import { IJwt } from "../common/jwt";
@@ -20,19 +20,19 @@ export class AuthJwtController {
   constructor(private readonly authService: AuthService, private readonly userService: UserService) {}
 
   @Public()
-  @Post("login")
+  @Post("/login")
   public login(@Body() data: LoginDto): Promise<IJwt> {
     return this.authService.login(data);
   }
 
   @Public()
-  @Post("refresh")
+  @Post("/refresh")
   async refreshToken(@Body() data: RefreshDto): Promise<IJwt> {
     return this.authService.refresh(data);
   }
 
   @Public()
-  @Get("logout")
+  @Post("/logout")
   public async logout(@Body() data: JwtLogoutDto): Promise<boolean> {
     await this.authService.logout(data);
     return true;

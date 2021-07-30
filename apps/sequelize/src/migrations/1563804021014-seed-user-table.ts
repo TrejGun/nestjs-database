@@ -15,7 +15,7 @@ export const up: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
         last_name: "Gun",
         email: "trejgun@gmail.com",
         password: "92f357f4a898825de204b25fffec4a0a1ca486ad1e25643502e33b5ebeefc3ff", // My5up3r5tr0ngP@55w0rd
-        roles: "{USER}",
+        roles: "{ADMIN}",
         status: "ACTIVE",
       },
     ],

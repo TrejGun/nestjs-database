@@ -1,5 +1,5 @@
 import { BelongsTo, Column, DataType, Model, Table } from "sequelize-typescript";
-import { Association } from "sequelize";
+import { Association, DataTypes, Sequelize } from "sequelize";
 
 import { ns } from "../common/constants";
 import { UserModel } from "../user/user.model";
@@ -33,6 +33,20 @@ export class AuthModel extends Model<IAuth> implements IAuth {
     type: DataType.INTEGER,
   })
   public userId: number;
+
+  @Column({
+    allowNull: false,
+    defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+    type: DataTypes.DATE,
+  })
+  public createdAt: string;
+
+  @Column({
+    allowNull: false,
+    defaultValue: Sequelize.fn("NOW"),
+    type: DataTypes.DATE,
+  })
+  public updatedAt: string;
 
   public static associations: {
     user: Association<AuthModel, UserModel>;

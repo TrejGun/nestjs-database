@@ -3,6 +3,7 @@ import { BelongsTo, Column, Model, Table } from "sequelize-typescript";
 import { IToken, TokenType } from "./interfaces";
 import { ns } from "../common/constants";
 import { UserModel } from "../user/user.model";
+import { DataTypes, Sequelize } from "sequelize";
 
 @Table({
   schema: ns,
@@ -28,9 +29,17 @@ export class TokenModel extends Model<IToken> implements IToken {
   })
   public readonly user: UserModel;
 
-  @Column
+  @Column({
+    allowNull: false,
+    defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+    type: DataTypes.DATE,
+  })
   public createdAt: string;
 
-  @Column
+  @Column({
+    allowNull: false,
+    defaultValue: Sequelize.fn("NOW"),
+    type: DataTypes.DATE,
+  })
   public updatedAt: string;
 }

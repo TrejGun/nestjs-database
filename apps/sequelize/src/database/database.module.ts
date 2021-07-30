@@ -9,6 +9,7 @@ import { SequelizeStorage, Umzug } from "umzug";
 
 import { UserModel } from "../user/user.model";
 import { AuthModel } from "../auth/auth.model";
+import { ns } from "../common/constants";
 
 @Module({
   imports: [
@@ -40,7 +41,7 @@ export class DatabaseModule {
       logger: console,
       storage: new SequelizeStorage({
         sequelize: this.sequelize,
-        modelName: "SequelizeMeta",
+        modelName: ns,
       }),
     });
 

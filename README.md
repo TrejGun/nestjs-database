@@ -1,7 +1,7 @@
 # WIP
 
 ✅ TypeOrm
-🚫 Sequelize
+✅ Sequelize
 🚫 MikroOrm
 🚫 Mongoose
 

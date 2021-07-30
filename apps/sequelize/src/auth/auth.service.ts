@@ -46,7 +46,7 @@ export class AuthService {
   }
 
   public async logout(where: WhereOptions<AuthModel>): Promise<number> {
-    return this.authModel.destroy({ where });
+    return this.authModel.destroy({ where: { ...where } });
   }
 
   public async refresh(where: WhereOptions<AuthModel>): Promise<IJwt> {
