@@ -1,4 +1,5 @@
 import { BelongsTo, Column, DataType, Model, Table } from "sequelize-typescript";
+import { Association } from "sequelize";
 
 import { ns } from "../common/constants";
 import { UserModel } from "../user/user.model";
@@ -27,4 +28,13 @@ export class AuthModel extends Model<IAuth> implements IAuth {
     targetKey: "id",
   })
   public readonly user: UserModel;
+
+  @Column({
+    type: DataType.INTEGER,
+  })
+  public userId: number;
+
+  public static associations: {
+    user: Association<AuthModel, UserModel>;
+  };
 }

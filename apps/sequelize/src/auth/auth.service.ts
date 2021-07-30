@@ -69,7 +69,7 @@ export class AuthService {
 
     await this.authModel
       .build({
-        user: userModel,
+        userId: userModel.id,
         refreshToken,
         refreshTokenExpiresAt: date.getTime() + refreshTokenExpiresIn * 1000,
       })

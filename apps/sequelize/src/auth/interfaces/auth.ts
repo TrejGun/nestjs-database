@@ -4,5 +4,5 @@ export interface IAuth {
   refreshToken: string;
   refreshTokenExpiresAt: number;
   user?: IUser;
-  // userId: number; ???
+  userId: number;
 }
