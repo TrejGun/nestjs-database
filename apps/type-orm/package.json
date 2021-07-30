@@ -55,7 +55,7 @@
   },
   "license": "MIT",
   "main": "./dist/index.js",
-  "name": "type-orm-for-nestjs",
+  "name": "@trejgun/type-orm",
   "scripts": {
     "build": "tsc",
     "entity:create": "npm run typeorm -- entity:create -n",

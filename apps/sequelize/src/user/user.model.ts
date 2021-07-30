@@ -1,6 +1,6 @@
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { Column, Model, Table } from "sequelize-typescript";
 
-import { IUser, IUserCreateDto } from "./interfaces";
+import { IUser, IUserCreateDto, UserRole, UserStatus } from "./interfaces";
 import { ns } from "../common/constants";
 
 @Table({
@@ -12,9 +12,8 @@ export class UserModel extends Model<IUser, IUserCreateDto> implements IUser {
   @Column({
     primaryKey: true,
     autoIncrement: true,
-    type: DataType.BIGINT,
   })
-  public id: string;
+  public id: number;
 
   @Column
   public firstName: string;
@@ -29,8 +28,14 @@ export class UserModel extends Model<IUser, IUserCreateDto> implements IUser {
   public password: string;
 
   @Column
-  public createdAt: Date;
+  public roles: Array<UserRole>;
 
   @Column
-  public updatedAt: Date;
+  public status: UserStatus;
+
+  @Column
+  public createdAt: string;
+
+  @Column
+  public updatedAt: string;
 }

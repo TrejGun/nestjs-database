@@ -5,9 +5,10 @@ import { ConfigService } from "@nestjs/config";
 
 import { UserService } from "../../user/user.service";
 import { UserModel } from "../../user/user.model";
+import { UserStatus } from "../../user/interfaces";
 
 @Injectable()
-export class JwtLocalStrategy extends PassportStrategy(Strategy, "jwt-http") {
+export class JwtHttpStrategy extends PassportStrategy(Strategy, "jwt-http") {
   constructor(private readonly userService: UserService, private readonly configService: ConfigService) {
     super({
       jwtFromRequest: ExtractJwt.fromExtractors([ExtractJwt.fromAuthHeaderAsBearerToken()]),
@@ -20,7 +21,11 @@ export class JwtLocalStrategy extends PassportStrategy(Strategy, "jwt-http") {
     const userModel = await this.userService.findOne({ email: payload.email });
 
     if (!userModel) {
-      throw new UnauthorizedException("userNotFound");
+      throw new UnauthorizedException();
+    }
+
+    if (userModel.status !== UserStatus.ACTIVE) {
+      throw new UnauthorizedException("userNotActive");
     }
 
     return userModel;

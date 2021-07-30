@@ -1,6 +1,6 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-import { IUser, UserRole } from "./interfaces";
+import { IUser, UserRole, UserStatus } from "./interfaces";
 import { ns } from "../common/constants";
 
 @Entity({ schema: ns, name: "user" })
@@ -20,4 +20,10 @@ export class UserEntity extends BaseEntity implements IUser {
     array: true,
   })
   public roles: Array<UserRole>;
+
+  @Column({
+    type: "enum",
+    enum: UserStatus,
+  })
+  public status: UserStatus;
 }

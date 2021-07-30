@@ -57,10 +57,10 @@
   },
   "license": "UNLICENSED",
   "main": "./dist/index.js",
-  "name": "@trejgun/nestjs-sequelize-umzug",
+  "name": "@trejgun/sequelize",
   "repository": {
     "type": "git",
-    "url": "https://github.com/trejgun/nestjs-sequelize-umzug"
+    "url": "https://github.com/trejgun/nestjs-database"
   },
   "scripts": {
     "build": "tsc",

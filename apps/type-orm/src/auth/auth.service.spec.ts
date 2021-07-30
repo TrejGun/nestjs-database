@@ -5,7 +5,7 @@ import { JwtModule } from "@nestjs/jwt";
 import { ConfigModule } from "@nestjs/config";
 
 import { AuthService } from "./auth.service";
-import { JwtStrategy } from "./strategies";
+import { JwtHttpStrategy } from "./strategies";
 import { UserModule } from "../user/user.module";
 import { AuthEntity } from "./auth.entity";
 import { DatabaseModule } from "../database/database.module";
@@ -27,7 +27,7 @@ describe("AuthService", () => {
           secret: process.env.JWT_SECRET_KEY,
         }),
       ],
-      providers: [AuthService, JwtStrategy],
+      providers: [AuthService, JwtHttpStrategy],
     }).compile();
 
     service = module.get<AuthService>(AuthService);

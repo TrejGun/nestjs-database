@@ -1,17 +1,19 @@
+import { ConfigService } from "@nestjs/config";
+import { Injectable, ConflictException } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
 import { createHash } from "crypto";
 import { Repository, FindConditions } from "typeorm";
 
-import { Injectable, ConflictException } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-
 import { UserEntity } from "./user.entity";
-import { IUserCreateDto } from "./interfaces";
+import { IUserCreateDto, UserStatus } from "./interfaces";
+import { IPasswordDto } from "../auth/interfaces";
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userEntityRepository: Repository<UserEntity>,
+    private readonly configService: ConfigService,
   ) {}
 
   public findOne(where: FindConditions<UserEntity>): Promise<UserEntity | undefined> {
@@ -26,7 +28,7 @@ export class UserService {
     return this.userEntityRepository.findOne({
       where: {
         email,
-        password: this.createPasswordHash(password, email),
+        password: this.createPasswordHash(password),
       },
     });
   }
@@ -41,14 +43,25 @@ export class UserService {
     user = await this.userEntityRepository
       .create({
         ...data,
-        password: this.createPasswordHash(data.password, data.email),
+        password: this.createPasswordHash(data.password),
       })
       .save();
 
     return user;
   }
 
-  private createPasswordHash(password: string, salt: string): string {
-    return createHash("sha256").update(password).update(salt).digest("hex");
+  public createPasswordHash(password: string): string {
+    const passwordSecret = this.configService.get<string>("PASSWORD_SECRET", "keyboard_cat");
+    return createHash("sha256").update(password).update(passwordSecret).digest("hex");
+  }
+
+  public updatePassword(userEntity: UserEntity, dto: IPasswordDto): Promise<UserEntity> {
+    userEntity.password = this.createPasswordHash(dto.password);
+    return userEntity.save();
+  }
+
+  public activate(userEntity: UserEntity): Promise<UserEntity> {
+    userEntity.status = UserStatus.ACTIVE;
+    return userEntity.save();
   }
 }

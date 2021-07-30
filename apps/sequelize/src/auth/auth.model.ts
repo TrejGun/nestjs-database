@@ -22,9 +22,6 @@ export class AuthModel extends Model<IAuth> implements IAuth {
   })
   public refreshTokenExpiresAt: number;
 
-  @Column
-  public ip: string;
-
   public readonly user: UserModel;
 }
 
