@@ -1,1 +1,1 @@
-export const ns = "mikroorm";
+export const ns = "sequelize";

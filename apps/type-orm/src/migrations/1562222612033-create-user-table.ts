@@ -28,6 +28,14 @@ export class CreateUserTable1562222612033 implements MigrationInterface {
           isPrimary: true,
         },
         {
+          name: "first_name",
+          type: "varchar",
+        },
+        {
+          name: "last_name",
+          type: "varchar",
+        },
+        {
           name: "email",
           type: "varchar",
         },
@@ -53,5 +61,6 @@ export class CreateUserTable1562222612033 implements MigrationInterface {
   public async down(queryRunner: QueryRunner): Promise<any> {
     await queryRunner.dropTable(`${ns}.user`);
     await queryRunner.query(`DROP TYPE ${ns}.user_role_enum;`);
+    await queryRunner.query(`DROP TYPE ${ns}.user_status_enum;`);
   }
 }

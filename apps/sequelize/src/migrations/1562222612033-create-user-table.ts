@@ -4,6 +4,13 @@ import { Sequelize, DataTypes } from "sequelize";
 import { ns } from "../common/constants";
 
 export const up: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
+  await sequelize.query(`
+      CREATE TYPE ${ns}.enum_user_roles AS ENUM (
+        'ADMIN',
+        'USER'
+      );
+    `);
+
   await sequelize.getQueryInterface().createTable(
     "user",
     {
@@ -16,9 +23,20 @@ export const up: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
       last_name: DataTypes.STRING,
       email: DataTypes.STRING,
       password: DataTypes.STRING,
-      // TODO fix me
-      // status: user_status_enum
-      // roles: user_roles_enum
+      status: {
+        type: DataTypes.ENUM({
+          values: ["ACTIVE", "INACTIVE", "PENDING"],
+        }),
+        defaultValue: "PENDING",
+      },
+      // roles: {
+      //   type: DataTypes.ARRAY(
+      //     DataTypes.ENUM({
+      //       values: Object.values(UserRole),
+      //     }),
+      //   ),
+      //   defaultValue: [UserRole.USER],
+      // },
       created_at: {
         type: DataTypes.DATE,
       },
@@ -31,8 +49,16 @@ export const up: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
       schema: ns,
     },
   );
+
+  // Working around https://github.com/sequelize/sequelize/issues/11285
+  await sequelize.query(`alter table ${ns}.user add column roles ${ns}.enum_user_roles[] not null default '{USER}';`);
 };
 
 export const down: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
-  await sequelize.getQueryInterface().dropTable("user");
+  await sequelize.getQueryInterface().dropTable("user", {
+    // @ts-ignore
+    schema: ns,
+  });
+  await sequelize.query(`DROP TYPE ${ns}.enum_user_status;`);
+  await sequelize.query(`DROP TYPE ${ns}.enum_user_roles;`);
 };

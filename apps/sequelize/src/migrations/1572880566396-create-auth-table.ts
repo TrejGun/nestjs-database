@@ -5,20 +5,16 @@ import { ns } from "../common/constants";
 
 export const up: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
   await sequelize.getQueryInterface().createTable(
-    "user",
+    "auth",
     {
       id: {
         primaryKey: true,
         autoIncrement: true,
         type: DataTypes.BIGINT,
       },
-      first_name: DataTypes.STRING,
-      last_name: DataTypes.STRING,
-      email: DataTypes.STRING,
-      password: DataTypes.STRING,
-      // TODO fix me
-      // status: user_status_enum
-      // roles: user_roles_enum
+      user_id: DataTypes.INTEGER,
+      refresh_token: DataTypes.STRING,
+      refresh_token_expires_at: DataTypes.BIGINT,
       created_at: {
         type: DataTypes.DATE,
       },
@@ -34,5 +30,5 @@ export const up: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
 };
 
 export const down: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
-  await sequelize.getQueryInterface().dropTable("user");
+  await sequelize.getQueryInterface().dropTable("auth");
 };

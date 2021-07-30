@@ -8,6 +8,7 @@ import { Sequelize } from "sequelize";
 import { SequelizeStorage, Umzug } from "umzug";
 
 import { UserModel } from "../user/user.model";
+import { AuthModel } from "../auth/auth.model";
 
 @Module({
   imports: [
@@ -21,7 +22,7 @@ import { UserModel } from "../user/user.model";
         username: configService.get<string>("POSTGRES_USER", "postgres"),
         password: configService.get<string>("POSTGRES_PASSWORD", "password"),
         database: configService.get<string>("POSTGRES_DB", "secondconnect"),
-        models: [UserModel],
+        models: [UserModel, AuthModel],
       }),
     }),
   ],

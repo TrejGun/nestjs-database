@@ -29,11 +29,13 @@ export class UserModel extends Model<IUser, IUserCreateDto> implements IUser {
   public password: string;
 
   @Column({
-    type: DataTypes.ENUM(...Object.values(UserRole)),
+    type: DataTypes.ARRAY(DataTypes.ENUM(...Object.values(UserRole))),
   })
   public roles: Array<UserRole>;
 
-  @Column
+  @Column({
+    type: DataTypes.ENUM(...Object.values(UserStatus)),
+  })
   public status: UserStatus;
 
   @Column

@@ -4,7 +4,6 @@ import { ConfigModule } from "@nestjs/config";
 
 import { JwtGuard, RolesGuard } from "./common/guards";
 import { CustomValidationPipe } from "./common/pipes";
-
 import { AuthModule } from "./auth/auth.module";
 import { UserModule } from "./user/user.module";
 import { DatabaseModule } from "./database/database.module";

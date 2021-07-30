@@ -9,6 +9,12 @@ export class UserEntity extends BaseEntity implements IUser {
   public id: number;
 
   @Column({ type: "varchar" })
+  public firstName: string;
+
+  @Column({ type: "varchar" })
+  public lastName: string;
+
+  @Column({ type: "varchar" })
   public email: string;
 
   @Column({ type: "varchar", select: false })

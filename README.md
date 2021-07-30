@@ -81,7 +81,7 @@ http://localhost:3000/users/profile \
 
 This will return your profile
 ```json
-{"id":1,"email":"trejgun@gmail.com","roles":["ADMIN"]}
+{"id":1,"firstName":"Trej","lastName":"Gun","email":"trejgun@gmail.com","roles":["ADMIN"]}
 ```
 
 ```bash
