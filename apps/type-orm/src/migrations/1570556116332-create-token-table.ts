@@ -72,7 +72,7 @@ export class CreateTokenTable1570556116332 implements MigrationInterface {
 
   public async down(queryRunner: QueryRunner): Promise<any> {
     await queryRunner.dropTable(`${ns}.token`);
-    await queryRunner.query(`DROP TYPE ${ns}.token_type_enum;`);
-    await queryRunner.query("DROP FUNCTION delete_expired_tokens();");
+    await queryRunner.query(`drop type ${ns}.token_type_enum;`);
+    await queryRunner.query("drop function delete_expired_tokens();");
   }
 }

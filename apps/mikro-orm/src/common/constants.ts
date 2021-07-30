@@ -1,1 +1,1 @@
-export const ns = "mikro-orm";
+export const ns = "mikroorm";

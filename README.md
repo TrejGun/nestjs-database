@@ -9,7 +9,7 @@
 
 I assume you have node, yarn/npm and postgres/mongodb
 
-First of all you have to download dependencies
+First you have to download dependencies
 ```bash
 npm i
 npm run bootstrap

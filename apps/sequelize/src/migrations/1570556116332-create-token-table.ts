@@ -18,9 +18,11 @@ export const up: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
       // user_id: int
       created_at: {
         type: DataTypes.DATE,
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
       updated_at: {
         type: DataTypes.DATE,
+        defaultValue: Sequelize.fn("NOW"),
       },
     },
     {

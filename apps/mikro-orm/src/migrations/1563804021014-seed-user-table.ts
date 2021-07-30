@@ -1,9 +1,11 @@
-import { MigrationInterface, QueryRunner } from "typeorm";
+import { Migration } from "@mikro-orm/migrations";
+
 import { ns } from "../common/constants";
 
-export class SeedUserTable1563804021014 implements MigrationInterface {
-  public async up(queryRunner: QueryRunner): Promise<any> {
-    await queryRunner.query(`
+export class SeedUserTable1563804021014 extends Migration {
+  // eslint-disable-next-line @typescript-eslint/require-await
+  public async up(): Promise<void> {
+    this.addSql(`
       insert into ${ns}.user (
         first_name,
         last_name,
@@ -22,7 +24,8 @@ export class SeedUserTable1563804021014 implements MigrationInterface {
     `);
   }
 
-  public async down(queryRunner: QueryRunner): Promise<any> {
-    await queryRunner.query(`truncate table ${ns}.user restart identity cascade;`);
+  // eslint-disable-next-line @typescript-eslint/require-await
+  public async down(): Promise<void> {
+    this.addSql(`truncate table ${ns}.user restart identity cascade;`);
   }
 }

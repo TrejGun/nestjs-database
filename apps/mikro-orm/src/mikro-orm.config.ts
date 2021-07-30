@@ -1,33 +1,23 @@
 import { Options, UnderscoreNamingStrategy } from "@mikro-orm/core";
 import { SqlHighlighter } from "@mikro-orm/sql-highlighter";
 import { TsMorphMetadataProvider } from "@mikro-orm/reflection";
-import { Migration20210720063728 } from "./migrations/Migration20210720063728";
+
 import { UserEntity } from "./user/user.entity";
 import { AuthEntity } from "./auth/auth.entity";
+import { TokenEntity } from "./token/token.entity";
+import { ns } from "./common/constants";
 
 const config: Options = {
   type: "postgresql",
-  clientUrl: process.env.POSTGRES_URL,
-  // entities: ["dist/**/*.entity.js"],
-  entities: [UserEntity, AuthEntity],
+  entities: [UserEntity, AuthEntity, TokenEntity],
   baseDir: process.cwd(),
   namingStrategy: UnderscoreNamingStrategy,
   migrations: {
-    tableName: "mikro_orm_migrations", // name of database table with log of executed transactions
-    path: "./src/migrations", // path to the folder with migrations
-    // pattern: /^[\w-]+\d+\.ts$/, // regex pattern for the migration files
-    // transactional: true, // wrap each migration in a transaction
-    // disableForeignKeys: true, // wrap statements with `set foreign_key_checks = 0` or equivalent
-    // allOrNothing: true, // wrap all migrations in master transaction
-    // dropTables: true, // allow to disable table dropping
-    // safe: false, // allow to disable table and column dropping
-    // emit: "ts", // migration generation mode
-    migrationsList: [
-      {
-        name: "Migration20210720063728.ts",
-        class: Migration20210720063728,
-      },
-    ],
+    tableName: ns,
+    path: "./src/migrations",
+    pattern: /^\d+-[\w-]+\.ts$/,
+    transactional: true,
+    allOrNothing: false,
   },
   debug: true,
   highlighter: new SqlHighlighter(),

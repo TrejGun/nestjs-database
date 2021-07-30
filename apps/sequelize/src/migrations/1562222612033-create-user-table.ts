@@ -5,7 +5,7 @@ import { ns } from "../common/constants";
 
 export const up: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
   await sequelize.query(`
-      CREATE TYPE ${ns}.enum_user_roles AS ENUM (
+      create type ${ns}.enum_user_roles as enum (
         'ADMIN',
         'USER'
       );
