@@ -1,4 +1,5 @@
 import { Column, Model, Table } from "sequelize-typescript";
+import { DataTypes } from "sequelize";
 
 import { IUser, IUserCreateDto, UserRole, UserStatus } from "./interfaces";
 import { ns } from "../common/constants";
@@ -27,7 +28,9 @@ export class UserModel extends Model<IUser, IUserCreateDto> implements IUser {
   @Column
   public password: string;
 
-  @Column
+  @Column({
+    type: DataTypes.ENUM(...Object.values(UserRole)),
+  })
   public roles: Array<UserRole>;
 
   @Column

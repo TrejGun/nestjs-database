@@ -1,4 +1,4 @@
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, Model, Table } from "sequelize-typescript";
 
 import { ns } from "../common/constants";
 import { UserModel } from "../user/user.model";
@@ -22,7 +22,9 @@ export class AuthModel extends Model<IAuth> implements IAuth {
   })
   public refreshTokenExpiresAt: number;
 
+  @BelongsTo(() => UserModel, {
+    foreignKey: "user_id",
+    targetKey: "id",
+  })
   public readonly user: UserModel;
 }
-
-AuthModel.belongsTo(UserModel, { targetKey: "id" });

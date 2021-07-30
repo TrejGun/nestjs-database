@@ -1,4 +1,4 @@
-import { Column, Model, Table } from "sequelize-typescript";
+import { BelongsTo, Column, Model, Table } from "sequelize-typescript";
 
 import { IToken, TokenType } from "./interfaces";
 import { ns } from "../common/constants";
@@ -22,6 +22,10 @@ export class TokenModel extends Model<IToken> implements IToken {
   @Column
   public type: TokenType;
 
+  @BelongsTo(() => UserModel, {
+    foreignKey: "user_id",
+    targetKey: "id",
+  })
   public readonly user: UserModel;
 
   @Column
@@ -30,5 +34,3 @@ export class TokenModel extends Model<IToken> implements IToken {
   @Column
   public updatedAt: string;
 }
-
-TokenModel.belongsTo(UserModel, { targetKey: "id" });

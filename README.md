@@ -1,5 +1,10 @@
 # WIP
 
+✅ TypeOrm
+🚫 Sequelize
+🚫 MikroOrm
+🚫 Mongoose
+
 ## Installation
 
 I assume you have node, yarn/npm and postgres/mongodb
