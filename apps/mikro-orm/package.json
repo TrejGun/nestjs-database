@@ -74,12 +74,11 @@
     "database:update": "npx mikro-orm schema:update -r",
     "entity:create": "npm run typeorm -- entity:create -n",
     "format": "prettier --write \"src/**/*.ts\"",
-    "lint": "eslint . --fix --ext .js,.jsx,.ts,.tsx",
+    "lint": "eslint . --fix --ext .js,.jsx",
     "prebuild": "rm -rf dist/",
-    "prod": "NODE_ENV=production node .",
     "start": "NODE_ENV=development tsc-watch --onSuccess \"node .\" --onFailure \"echo Compilation Failed\"",
     "test": "NODE_ENV=test jest --config jest.config.json --detectOpenHandles"
   },
-  "title": "JWT based authorization for Nest.js",
+  "title": "MikroOrm for Nest.js",
   "version": "0.0.1"
 }

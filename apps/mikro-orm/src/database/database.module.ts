@@ -1,10 +1,9 @@
 // this is needed by umzug to run *.ts migrations
 import "ts-node/register";
 
-import { MikroORM } from "@mikro-orm/core";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { Module } from "@nestjs/common";
-
+import { MikroORM } from "@mikro-orm/core";
 import { MikroOrmModule } from "@mikro-orm/nestjs";
 
 import mikroormconfig from "../mikro-orm.config";
