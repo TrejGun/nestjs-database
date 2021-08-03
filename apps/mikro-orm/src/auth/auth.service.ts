@@ -68,18 +68,18 @@ export class AuthService {
     const refreshTokenExpiresIn = ~~this.configService.get<number>("JWT_REFRESH_TOKEN_EXPIRES_IN", 30 * 24 * 60 * 60);
 
     const authEntity = this.authEntityRepository.create({
-      userId: userEntity.id,
+      user: userEntity,
       refreshToken,
-      refreshTokenExpiresAt: date.getTime() + refreshTokenExpiresIn,
+      refreshTokenExpiresAt: date.getTime() + refreshTokenExpiresIn * 1000,
     });
 
     await this.authEntityRepository.nativeInsert(authEntity);
 
     return {
-      accessToken: this.jwtService.sign({ email: userEntity.email }, { expiresIn: accessTokenExpiresIn / 1000 }),
+      accessToken: this.jwtService.sign({ email: userEntity.email }, { expiresIn: accessTokenExpiresIn }),
       refreshToken: refreshToken,
-      accessTokenExpiresAt: date.getTime() + accessTokenExpiresIn,
-      refreshTokenExpiresAt: date.getTime() + refreshTokenExpiresIn,
+      accessTokenExpiresAt: date.getTime() + accessTokenExpiresIn * 1000,
+      refreshTokenExpiresAt: date.getTime() + refreshTokenExpiresIn * 1000,
     };
   }
 

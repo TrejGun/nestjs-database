@@ -1,7 +1,8 @@
-import { Enum, Entity, EntityRepositoryType, PrimaryKey, Property } from "@mikro-orm/core";
+import { Entity, EntityRepositoryType, Enum, PrimaryKey, Property } from "@mikro-orm/core";
 
 import { ns } from "../common/constants";
-import { IUser, UserRole, UserStatus } from "./interfaces";
+import { IUser, UserStatus } from "./interfaces";
+import { NativeEnumArrayType } from "../database/native.enum";
 
 @Entity({ collection: `${ns}.user` })
 export class UserEntity {
@@ -22,8 +23,9 @@ export class UserEntity {
   @Property({ columnType: "varchar", hidden: true })
   public password?: string;
 
-  @Enum({ items: () => UserRole, array: true, default: [UserRole.USER] })
-  public roles: Array<UserRole>;
+  // @Enum({ items: () => UserRole, array: true, default: [UserRole.USER] })
+  @Property({ type: NativeEnumArrayType })
+  public roles: unknown;
 
   @Enum({
     items: () => UserStatus,

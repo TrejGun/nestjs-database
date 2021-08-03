@@ -20,7 +20,7 @@ export class CreateTokenTable1570556116332 implements MigrationInterface {
           isPrimary: true,
         },
         {
-          name: "token",
+          name: "code",
           type: "varchar",
         },
         {

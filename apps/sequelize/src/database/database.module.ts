@@ -7,9 +7,10 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
 import { Sequelize } from "sequelize";
 import { SequelizeStorage, Umzug } from "umzug";
 
+import { ns } from "../common/constants";
 import { UserModel } from "../user/user.model";
 import { AuthModel } from "../auth/auth.model";
-import { ns } from "../common/constants";
+import { TokenModel } from "../token/token.model";
 
 @Module({
   imports: [
@@ -23,7 +24,7 @@ import { ns } from "../common/constants";
         username: configService.get<string>("POSTGRES_USER", "postgres"),
         password: configService.get<string>("POSTGRES_PASSWORD", "password"),
         database: configService.get<string>("POSTGRES_DB", "secondconnect"),
-        models: [UserModel, AuthModel],
+        models: [UserModel, AuthModel, TokenModel],
       }),
     }),
   ],

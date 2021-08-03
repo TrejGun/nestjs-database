@@ -12,10 +12,11 @@ export const up: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
         autoIncrement: true,
         type: DataTypes.BIGINT,
       },
-      // TODO fix me
-      // token: varchar
-      // type: token_type_enum
-      // user_id: int
+      code: DataTypes.STRING,
+      type: DataTypes.ENUM({
+        values: ["EMAIL", "PASSWORD"],
+      }),
+      user_id: DataTypes.INTEGER,
       created_at: {
         type: DataTypes.DATE,
         defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),

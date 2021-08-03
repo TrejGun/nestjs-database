@@ -7,7 +7,7 @@ import { DataTypes, Sequelize } from "sequelize";
 
 @Table({
   schema: ns,
-  tableName: "user",
+  tableName: "token",
   underscored: true,
 })
 export class TokenModel extends Model<IToken> implements IToken {

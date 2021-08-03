@@ -1,11 +1,11 @@
 import { ConfigService } from "@nestjs/config";
-import { Injectable, ConflictException } from "@nestjs/common";
+import { ConflictException, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { createHash } from "crypto";
-import { Repository, FindConditions } from "typeorm";
+import { FindConditions, Repository } from "typeorm";
 
 import { UserEntity } from "./user.entity";
-import { IUserCreateDto, UserStatus } from "./interfaces";
+import { IUserCreateDto, UserRole, UserStatus } from "./interfaces";
 import { IPasswordDto } from "../auth/interfaces";
 
 @Injectable()
@@ -43,6 +43,8 @@ export class UserService {
     user = await this.userEntityRepository
       .create({
         ...data,
+        roles: [UserRole.USER],
+        status: UserStatus.PENDING,
         password: this.createPasswordHash(data.password),
       })
       .save();
