@@ -4,7 +4,7 @@ import { Document } from "mongoose";
 import { IUser, UserRole, UserStatus } from "./interfaces";
 
 @Schema()
-export class UserEntity implements IUser {
+export class UserModel implements IUser {
   @Prop()
   public id: string;
 
@@ -27,12 +27,12 @@ export class UserEntity implements IUser {
   public status: UserStatus;
 
   @Prop()
-  public createdAt = new Date();
+  public createdAt: string;
 
   @Prop()
-  public updatedAt = new Date();
+  public updatedAt: string;
 }
 
-export type UserDocument = UserEntity & Document;
+export type UserDocument = UserModel & Document;
 
-export const UserSchema = SchemaFactory.createForClass(UserEntity);
+export const UserSchema = SchemaFactory.createForClass(UserModel);

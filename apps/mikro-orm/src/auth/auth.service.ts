@@ -40,7 +40,7 @@ export class AuthService {
     const userEntity = await this.userService.getByCredentials(data.email, data.password);
 
     if (!userEntity) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException("userNotFound");
     }
 
     return this.loginUser(userEntity);
@@ -54,7 +54,7 @@ export class AuthService {
     const authEntity = await this.authEntityRepository.findOne({ ...where }, ["user"]);
 
     if (!authEntity || authEntity.refreshTokenExpiresAt < new Date().getTime()) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException("refreshTokenHasExpired");
     }
 
     return this.loginUser(authEntity.user);

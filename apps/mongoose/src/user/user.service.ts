@@ -4,14 +4,14 @@ import { InjectModel } from "@nestjs/mongoose";
 import { FilterQuery, Model } from "mongoose";
 import { createHash } from "crypto";
 
-import { UserEntity, UserDocument } from "./user.entity";
+import { UserModel, UserDocument } from "./user.model";
 import { IUserCreateDto, UserStatus } from "./interfaces";
 import { IPasswordDto } from "../auth/interfaces";
 
 @Injectable()
 export class UserService {
   constructor(
-    @InjectModel(UserEntity.name)
+    @InjectModel(UserModel.name)
     private userModel: Model<UserDocument>,
     private readonly configService: ConfigService,
   ) {}

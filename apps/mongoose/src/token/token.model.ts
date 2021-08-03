@@ -1,18 +1,18 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import mongoose, { Document } from "mongoose";
 
-import { UserDocument } from "../user/user.entity";
+import { UserDocument } from "../user/user.model";
 import { IToken, TokenType } from "./interfaces";
 
 @Schema()
-export class TokenEntity implements IToken {
+export class TokenModel implements IToken {
   @Prop()
   public code: string;
 
   @Prop()
   public type: TokenType;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: "User" })
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: "UserModel" })
   public user: UserDocument;
 
   @Prop()
@@ -22,6 +22,6 @@ export class TokenEntity implements IToken {
   public updatedAt: string;
 }
 
-export type TokenDocument = TokenEntity & Document;
+export type TokenDocument = TokenModel & Document;
 
-export const TokenSchema = SchemaFactory.createForClass(TokenEntity);
+export const TokenSchema = SchemaFactory.createForClass(TokenModel);

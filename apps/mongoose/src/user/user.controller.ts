@@ -1,6 +1,6 @@
 import { Controller, Get } from "@nestjs/common";
 
-import { UserEntity } from "./user.entity";
+import { UserModel } from "./user.model";
 import { Roles, User } from "../common/decorators";
 import { UserRole } from "./interfaces";
 import { UserService } from "./user.service";
@@ -10,13 +10,13 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get("/profile")
-  getGloballyProtectedProfile(@User() user: UserEntity): UserEntity {
+  getGloballyProtectedProfile(@User() user: UserModel): UserModel {
     return user;
   }
 
   @Get("/")
   @Roles(UserRole.ADMIN)
-  public findAll(): Promise<{ rows: Array<UserEntity>; count: number }> {
+  public findAll(): Promise<{ rows: Array<UserModel>; count: number }> {
     return this.userService.findAndCount().then(([rows, count]) => ({ rows, count }));
   }
 }

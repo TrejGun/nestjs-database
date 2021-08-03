@@ -1,3 +1,6 @@
+// this is needed by umzug to run *.ts migrations
+import "ts-node/register";
+
 import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { InjectConnection, MongooseModule } from "@nestjs/mongoose";
@@ -13,7 +16,7 @@ import { ns } from "../common/constants";
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => {
         return {
-          uri: configService.get<string>("MONGO_URL", "postgres://postgres:password@127.0.0.1/postgres"),
+          uri: configService.get<string>("MONGO_URL", "mongodb://localhost:27017"),
         };
       },
     }),

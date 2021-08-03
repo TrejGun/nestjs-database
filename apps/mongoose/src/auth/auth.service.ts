@@ -7,7 +7,7 @@ import { v4 } from "uuid";
 
 import { IJwt } from "../common/jwt";
 import { UserService } from "../user/user.service";
-import { UserEntity } from "../user/user.entity";
+import { UserModel } from "../user/user.model";
 import {
   IEmailVerificationDto,
   IForgotPasswordDto,
@@ -15,7 +15,7 @@ import {
   IResendEmailVerificationDto,
   IRestorePasswordDto,
 } from "./interfaces";
-import { AuthDocument, AuthEntity } from "./auth.entity";
+import { AuthDocument, AuthModel } from "./auth.model";
 import { TokenService } from "../token/token.service";
 import { EmailService } from "../email/email.service";
 import { IUserCreateDto, UserStatus } from "../user/interfaces";
@@ -25,7 +25,7 @@ import { TokenType } from "../token/interfaces";
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectModel(AuthEntity.name)
+    @InjectModel(AuthModel.name)
     private authModel: Model<AuthDocument>,
     private readonly userService: UserService,
     private readonly tokenService: TokenService,
@@ -38,7 +38,7 @@ export class AuthService {
     const userEntity = await this.userService.getByCredentials(data.email, data.password);
 
     if (!userEntity) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException("userNotFound");
     }
 
     return this.loginUser(userEntity);
@@ -52,13 +52,13 @@ export class AuthService {
     const authEntity = await this.authModel.findOne(where, {}, { populate: "user" });
 
     if (!authEntity || authEntity.refreshTokenExpiresAt < new Date().getTime()) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException("refreshTokenHasExpired");
     }
 
     return this.loginUser(authEntity.user);
   }
 
-  public async loginUser(userEntity: UserEntity): Promise<IJwt> {
+  public async loginUser(userEntity: UserModel): Promise<IJwt> {
     const refreshToken = v4();
     const date = new Date();
 
@@ -69,18 +69,18 @@ export class AuthService {
     await this.authModel.create({
       userId: userEntity.id,
       refreshToken,
-      refreshTokenExpiresAt: date.getTime() + refreshTokenExpiresIn,
+      refreshTokenExpiresAt: date.getTime() + refreshTokenExpiresIn * 1000,
     });
 
     return {
-      accessToken: this.jwtService.sign({ email: userEntity.email }, { expiresIn: accessTokenExpiresIn / 1000 }),
+      accessToken: this.jwtService.sign({ email: userEntity.email }, { expiresIn: accessTokenExpiresIn }),
       refreshToken: refreshToken,
-      accessTokenExpiresAt: date.getTime() + accessTokenExpiresIn,
-      refreshTokenExpiresAt: date.getTime() + refreshTokenExpiresIn,
+      accessTokenExpiresAt: date.getTime() + accessTokenExpiresIn * 1000,
+      refreshTokenExpiresAt: date.getTime() + refreshTokenExpiresIn * 1000,
     };
   }
 
-  public async signup(data: IUserCreateDto): Promise<UserEntity> {
+  public async signup(data: IUserCreateDto): Promise<UserModel> {
     const userEntity = await this.userService.create(data);
 
     const baseUrl = this.configService.get<string>("FE_URL", "http://localhost:3005");

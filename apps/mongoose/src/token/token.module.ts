@@ -2,13 +2,13 @@ import { Module } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 
 import { TokenService } from "./token.service";
-import { TokenEntity, TokenSchema } from "./token.entity";
+import { TokenModel, TokenSchema } from "./token.model";
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       {
-        name: TokenEntity.name,
+        name: TokenModel.name,
         schema: TokenSchema,
       },
     ]),

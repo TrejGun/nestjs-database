@@ -3,14 +3,14 @@ import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { FilterQuery, Model } from "mongoose";
 
-import { TokenDocument, TokenEntity } from "./token.entity";
-import { UserDocument } from "../user/user.entity";
+import { TokenDocument, TokenModel } from "./token.model";
+import { UserDocument } from "../user/user.model";
 import { TokenType } from "./interfaces";
 
 @Injectable()
 export class TokenService {
   constructor(
-    @InjectModel(TokenEntity.name)
+    @InjectModel(TokenModel.name)
     private tokenModel: Model<TokenDocument>,
   ) {}
 
@@ -18,7 +18,7 @@ export class TokenService {
     return this.tokenModel.findOne(where, {}, { populate: "user" }).exec();
   }
 
-  public async getToken(type: TokenType, userEntity: UserDocument): Promise<TokenEntity> {
+  public async getToken(type: TokenType, userEntity: UserDocument): Promise<TokenModel> {
     // working around https://github.com/typeorm/typeorm/issues/1090
     const tokenEntity = await this.tokenModel.findOne({
       type,

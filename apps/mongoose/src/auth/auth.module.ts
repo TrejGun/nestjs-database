@@ -5,7 +5,7 @@ import { JwtModule } from "@nestjs/jwt";
 import { MongooseModule } from "@nestjs/mongoose";
 
 import { AuthService } from "./auth.service";
-import { AuthEntity, AuthSchema } from "./auth.entity";
+import { AuthModel, AuthSchema } from "./auth.model";
 import { UserModule } from "../user/user.module";
 import { AuthJwtController } from "./auth.jwt.controller";
 import { JwtHttpStrategy } from "./strategies";
@@ -16,7 +16,7 @@ import { EmailModule } from "../email/email.module";
   imports: [
     MongooseModule.forFeature([
       {
-        name: AuthEntity.name,
+        name: AuthModel.name,
         schema: AuthSchema,
       },
     ]),

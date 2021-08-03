@@ -4,7 +4,7 @@ import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 
 import { UserService } from "../../user/user.service";
-import { UserEntity } from "../../user/user.entity";
+import { UserModel } from "../../user/user.model";
 import { UserStatus } from "../../user/interfaces";
 
 @Injectable()
@@ -17,7 +17,7 @@ export class JwtHttpStrategy extends PassportStrategy(Strategy, "jwt-http") {
     });
   }
 
-  public async validate(payload: { email: string }): Promise<UserEntity> {
+  public async validate(payload: { email: string }): Promise<UserModel> {
     const userEntity = await this.userService.findOne({ email: payload.email });
 
     if (!userEntity) {
