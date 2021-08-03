@@ -3,7 +3,6 @@ import { JwtService } from "@nestjs/jwt";
 import { ConfigService } from "@nestjs/config";
 import { InjectRepository } from "@mikro-orm/nestjs";
 import { EntityRepository } from "@mikro-orm/postgresql";
-import { FilterQuery } from "@mikro-orm/core";
 import { v4 } from "uuid";
 
 import { IJwt } from "../common/jwt";
@@ -13,6 +12,7 @@ import {
   IEmailVerificationDto,
   IForgotPasswordDto,
   ILoginDto,
+  ILogoutDto,
   IRefreshDto,
   IResendEmailVerificationDto,
   IRestorePasswordDto,
@@ -46,8 +46,8 @@ export class AuthService {
     return this.loginUser(userEntity);
   }
 
-  public async logout(where: FilterQuery<AuthEntity>): Promise<number> {
-    return this.authEntityRepository.nativeDelete(where);
+  public async logout(where: ILogoutDto): Promise<number> {
+    return this.authEntityRepository.nativeDelete({ ...where });
   }
 
   public async refresh(where: IRefreshDto): Promise<IJwt> {

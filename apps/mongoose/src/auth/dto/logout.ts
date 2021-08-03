@@ -3,7 +3,7 @@ import { IsString } from "class-validator";
 
 import { ILogoutDto } from "../interfaces";
 
-export class JwtLogoutDto implements ILogoutDto {
+export class LogoutDto implements ILogoutDto {
   @ApiProperty()
   @IsString()
   public refreshToken: string;

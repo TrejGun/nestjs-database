@@ -2,7 +2,7 @@
 
 ✅ TypeOrm
 ✅ Sequelize
-🚫 MikroOrm
+✅ MikroOrm
 🚫 Mongoose
 
 ## Installation
@@ -71,7 +71,7 @@ refreshToken is valid for 30 days, but can be destroyed manually
 ```sh
  curl \
  -X POST http://127.0.0.1:3000/auth/logout \
- -d '{"refreshToken: "2b1764be-a13f-4630-9696-09f9e0f2bbd7"}' \
+ -d '{"refreshToken": "2b1764be-a13f-4630-9696-09f9e0f2bbd7"}' \
  -H "Content-Type: application/json"
  ```
 
@@ -95,7 +95,7 @@ This will return your profile
 
 ```bash
 curl \
-http://localhost:3000/users/list \
+http://localhost:3000/users \
 -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRyZWpndW5AZ21haWwuY29tIiwiaWQiOjEsImlhdCI6MTU3Mjc4MjA1MiwiZXhwIjoxNTcyNzgyMTEyfQ.JwBpPo8eK4WAY2hs4orkbQ7j-QShGToMixUiadGJZf4"
 
 ```

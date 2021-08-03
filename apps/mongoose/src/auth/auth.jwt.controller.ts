@@ -5,7 +5,7 @@ import { IJwt } from "../common/jwt";
 import { AuthService } from "./auth.service";
 import { UserService } from "../user/user.service";
 import {
-  JwtLogoutDto,
+  LogoutDto,
   RefreshDto,
   LoginDto,
   VerifyEmailDto,
@@ -31,7 +31,7 @@ export class AuthJwtController {
   }
 
   @Get("/logout")
-  public async logout(@Body() data: JwtLogoutDto): Promise<boolean> {
+  public async logout(@Body() data: LogoutDto): Promise<boolean> {
     await this.authService.logout(data);
     return true;
   }

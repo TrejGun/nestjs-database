@@ -29,7 +29,7 @@ export class CreateTokenTable1570556116332 extends Migration {
       LANGUAGE plpgsql
       AS $$
         BEGIN
-          DELETE FROM ${ns}.token WHERE time_created_at < NOW() - INTERVAL '1 hour';
+          DELETE FROM ${ns}.token WHERE created_at < NOW() - INTERVAL '1 hour';
           RETURN NEW;
         END;
       $$;
