@@ -13,6 +13,7 @@ import {
   IEmailVerificationDto,
   IForgotPasswordDto,
   ILoginDto,
+  IRefreshDto,
   IResendEmailVerificationDto,
   IRestorePasswordDto,
 } from "./interfaces";
@@ -49,8 +50,8 @@ export class AuthService {
     return this.authEntityRepository.nativeDelete(where);
   }
 
-  public async refresh(where: FilterQuery<AuthEntity>): Promise<IJwt> {
-    const authEntity = await this.authEntityRepository.findOne(where, ["user"]);
+  public async refresh(where: IRefreshDto): Promise<IJwt> {
+    const authEntity = await this.authEntityRepository.findOne({ ...where }, ["user"]);
 
     if (!authEntity || authEntity.refreshTokenExpiresAt < new Date().getTime()) {
       throw new UnauthorizedException();
