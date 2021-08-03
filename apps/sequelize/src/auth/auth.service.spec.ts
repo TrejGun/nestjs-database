@@ -1,5 +1,5 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { TypeOrmModule } from "@nestjs/typeorm";
+import { SequelizeModule } from "@nestjs/sequelize";
 import { PassportModule } from "@nestjs/passport";
 import { JwtModule } from "@nestjs/jwt";
 import { ConfigModule, ConfigService } from "@nestjs/config";
@@ -7,7 +7,7 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
 import { AuthService } from "./auth.service";
 import { JwtHttpStrategy } from "./strategies";
 import { UserModule } from "../user/user.module";
-import { AuthEntity } from "./auth.entity";
+import { AuthModel } from "./auth.model";
 import { DatabaseModule } from "../database/database.module";
 import { EmailModule } from "../email/email.module";
 import { TokenModule } from "../token/token.module";
@@ -22,7 +22,7 @@ describe("AuthService", () => {
           envFilePath: ".env",
         }),
         DatabaseModule,
-        TypeOrmModule.forFeature([AuthEntity]),
+        SequelizeModule.forFeature([AuthModel]),
         UserModule,
         PassportModule,
         JwtModule.registerAsync({

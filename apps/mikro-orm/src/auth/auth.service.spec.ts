@@ -1,5 +1,5 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { TypeOrmModule } from "@nestjs/typeorm";
+import { MikroOrmModule } from "@mikro-orm/nestjs";
 import { PassportModule } from "@nestjs/passport";
 import { JwtModule } from "@nestjs/jwt";
 import { ConfigModule, ConfigService } from "@nestjs/config";
@@ -22,7 +22,7 @@ describe("AuthService", () => {
           envFilePath: ".env",
         }),
         DatabaseModule,
-        TypeOrmModule.forFeature([AuthEntity]),
+        MikroOrmModule.forFeature([AuthEntity]),
         UserModule,
         PassportModule,
         JwtModule.registerAsync({

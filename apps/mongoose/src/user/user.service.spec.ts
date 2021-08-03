@@ -1,10 +1,10 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { TypeOrmModule } from "@nestjs/typeorm";
+import { MongooseModule } from "@nestjs/mongoose";
 import { ConfigModule } from "@nestjs/config";
 
 import { DatabaseModule } from "../database/database.module";
 import { UserService } from "./user.service";
-import { UserEntity } from "./user.entity";
+import { UserModel, UserSchema } from "./user.model";
 
 describe("UserService", () => {
   let service: UserService;
@@ -16,7 +16,12 @@ describe("UserService", () => {
           envFilePath: ".env",
         }),
         DatabaseModule,
-        TypeOrmModule.forFeature([UserEntity]),
+        MongooseModule.forFeature([
+          {
+            name: UserModel.name,
+            schema: UserSchema,
+          },
+        ]),
       ],
       providers: [UserService],
     }).compile();

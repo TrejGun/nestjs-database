@@ -1,5 +1,5 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { TypeOrmModule } from "@nestjs/typeorm";
+import { MongooseModule } from "@nestjs/mongoose";
 import { PassportModule } from "@nestjs/passport";
 import { JwtModule } from "@nestjs/jwt";
 import { ConfigModule, ConfigService } from "@nestjs/config";
@@ -7,10 +7,10 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
 import { AuthService } from "./auth.service";
 import { JwtHttpStrategy } from "./strategies";
 import { UserModule } from "../user/user.module";
-import { AuthEntity } from "./auth.entity";
 import { DatabaseModule } from "../database/database.module";
 import { EmailModule } from "../email/email.module";
 import { TokenModule } from "../token/token.module";
+import { AuthModel, AuthSchema } from "./auth.model";
 
 describe("AuthService", () => {
   let service: AuthService;
@@ -22,7 +22,12 @@ describe("AuthService", () => {
           envFilePath: ".env",
         }),
         DatabaseModule,
-        TypeOrmModule.forFeature([AuthEntity]),
+        MongooseModule.forFeature([
+          {
+            name: AuthModel.name,
+            schema: AuthSchema,
+          },
+        ]),
         UserModule,
         PassportModule,
         JwtModule.registerAsync({

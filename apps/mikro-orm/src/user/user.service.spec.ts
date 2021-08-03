@@ -1,5 +1,5 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { TypeOrmModule } from "@nestjs/typeorm";
+import { MikroOrmModule } from "@mikro-orm/nestjs";
 import { ConfigModule } from "@nestjs/config";
 
 import { DatabaseModule } from "../database/database.module";
@@ -16,7 +16,7 @@ describe("UserService", () => {
           envFilePath: ".env",
         }),
         DatabaseModule,
-        TypeOrmModule.forFeature([UserEntity]),
+        MikroOrmModule.forFeature([UserEntity]),
       ],
       providers: [UserService],
     }).compile();

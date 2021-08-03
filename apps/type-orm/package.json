@@ -59,6 +59,10 @@
   "license": "MIT",
   "main": "./dist/index.js",
   "name": "@trejgun/type-orm",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/trejgun/nestjs-database"
+  },
   "scripts": {
     "build": "tsc",
     "entity:create": "npm run typeorm -- entity:create -n",

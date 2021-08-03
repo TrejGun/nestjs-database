@@ -14,7 +14,7 @@
   "engines": {
     "node": ">=12.13"
   },
-  "license": "UNLICENSED",
+  "license": "MIT",
   "name": "@trejgun/nestjs-auth",
   "private": true,
   "repository": {

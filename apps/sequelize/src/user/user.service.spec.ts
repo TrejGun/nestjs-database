@@ -1,10 +1,10 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { TypeOrmModule } from "@nestjs/typeorm";
+import { SequelizeModule } from "@nestjs/sequelize";
 import { ConfigModule } from "@nestjs/config";
 
 import { DatabaseModule } from "../database/database.module";
 import { UserService } from "./user.service";
-import { UserEntity } from "./user.entity";
+import { UserModel } from "./user.model";
 
 describe("UserService", () => {
   let service: UserService;
@@ -16,7 +16,7 @@ describe("UserService", () => {
           envFilePath: ".env",
         }),
         DatabaseModule,
-        TypeOrmModule.forFeature([UserEntity]),
+        SequelizeModule.forFeature([UserModel]),
       ],
       providers: [UserService],
     }).compile();

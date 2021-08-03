@@ -19,7 +19,7 @@ const config: Options = {
     transactional: true,
     allOrNothing: false,
   },
-  debug: true,
+  debug: false,
   highlighter: new SqlHighlighter(),
   metadataProvider: TsMorphMetadataProvider,
 };
