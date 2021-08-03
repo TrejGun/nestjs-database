@@ -1,4 +1,4 @@
-import { Body, ClassSerializerInterceptor, Controller, Get, HttpCode, Post, UseInterceptors } from "@nestjs/common";
+import { Body, ClassSerializerInterceptor, Controller, HttpCode, Post, UseInterceptors } from "@nestjs/common";
 
 import { Public } from "../common/decorators";
 import { IJwt } from "../common/jwt";
@@ -30,7 +30,7 @@ export class AuthJwtController {
     return this.authService.refresh(data);
   }
 
-  @Get("/logout")
+  @Post("/logout")
   public async logout(@Body() data: LogoutDto): Promise<boolean> {
     await this.authService.logout(data);
     return true;

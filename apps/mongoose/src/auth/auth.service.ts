@@ -67,7 +67,7 @@ export class AuthService {
     const refreshTokenExpiresIn = ~~this.configService.get<number>("JWT_REFRESH_TOKEN_EXPIRES_IN", 30 * 24 * 60 * 60);
 
     await this.authModel.create({
-      userId: userEntity.id,
+      user: userEntity,
       refreshToken,
       refreshTokenExpiresAt: date.getTime() + refreshTokenExpiresIn * 1000,
     });
