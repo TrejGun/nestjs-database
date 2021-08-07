@@ -10,7 +10,7 @@ services:
     volumes:
 #      - ./data/mongodb/mongod.conf:/etc/mongod.conf
       - ./init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
-      - ./data/db/:/data/db/
+      - ./data/:/data/
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=root
@@ -41,4 +41,3 @@ services:
       - mongodb
     links:
       - mongodb
-
