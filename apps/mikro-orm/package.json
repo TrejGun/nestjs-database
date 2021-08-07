@@ -1,7 +1,8 @@
 {
   "author": {
-    "email": "TrejGun+OpenSource@gmail.com",
-    "name": "TrejGun"
+    "email": "TrejGun+GemunIonStudio@gmail.com",
+    "name": "TrejGun",
+    "url": "https://github.com/GemunIonStudio"
   },
   "dependencies": {
     "@mikro-orm/core": "4.5.7",
@@ -30,9 +31,10 @@
     "uuid": "8.3.2"
   },
   "devDependencies": {
+    "@gemunionstudio/cross-env": "0.0.3",
+    "@gemunionstudio/eslint-config": "0.1.8",
     "@mikro-orm/cli": "4.5.7",
     "@nestjs/testing": "8.0.6",
-    "@trejgun/eslint-config": "0.1.7",
     "@types/express": "4.17.13",
     "@types/jest": "26.0.24",
     "@types/node": "14.17.9",
@@ -70,6 +72,10 @@
     "useTsNode": true
   },
   "name": "@trejgun/mikro-orm",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GemunIonStudio/nestjs-database"
+  },
   "scripts": {
     "build": "tsc",
     "database:create": "npx mikro-orm schema:create -r",
@@ -79,8 +85,9 @@
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint . --fix",
     "prebuild": "rm -rf dist/",
-    "start": "NODE_ENV=development tsc-watch --onSuccess \"node .\" --onFailure \"echo Compilation Failed\"",
-    "test": "NODE_ENV=test jest --config jest.config.json --detectOpenHandles"
+    "prod": "cross-env NODE_ENV=${NODE_ENV:=production} node .",
+    "start": "cross-env NODE_ENV=${NODE_ENV:=development} tsc-watch --onSuccess \"node .\" --onFailure \"echo Compilation Failed\"",
+    "test": "cross-env NODE_ENV=${NODE_ENV:=test} jest --config jest.config.json --detectOpenHandles"
   },
   "title": "MikroOrm for Nest.js",
   "version": "0.0.1"
