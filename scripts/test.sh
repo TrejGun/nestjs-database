@@ -14,4 +14,4 @@ lerna bootstrap --hoist
 
 # lerna run lint --stream --parallel
 
-lerna exec --stream -- npm run test -- --forceExit
+lerna exec --stream -- npm run test -- --forceExit --runInBand
