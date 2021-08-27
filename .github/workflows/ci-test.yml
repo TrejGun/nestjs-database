@@ -16,7 +16,7 @@ jobs:
         env:
           POSTGRES_PASSWORD: postgres
           POSTGRES_USER: postgres
-          POSTGRES_DB: test-db
+#          POSTGRES_DB: test-db
           POSTGRES_PORT: 5432
         ports: ["5432:5432"]
         # Set health checks to wait until postgres has started
@@ -45,6 +45,6 @@ jobs:
         run: npm run test
         env:
           NODE_ENV: test
-          POSTGRES_URL: 'postgres://postgres:postgres@0.0.0.0:5432/test-db'
+          POSTGRES_URL: 'postgres://postgres:password@0.0.0.0:5432/postgres'
           MONGO_URL: 'mongodb://mongodb:mongodb@0.0.0.0:27017/development'
 
