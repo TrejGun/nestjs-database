@@ -46,5 +46,5 @@ jobs:
         env:
           NODE_ENV: test
           POSTGRES_URL: 'postgres://postgres:postgres@0.0.0.0:5432/test-db'
-          MONGO_URL: 'mongodb://mongodb:mongodb@0.0.0.0:27017/test'
+          MONGO_URL: 'mongodb://mongodb:mongodb@0.0.0.0:27017/development'
 
