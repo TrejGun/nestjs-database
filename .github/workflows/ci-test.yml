@@ -14,9 +14,9 @@ jobs:
         image: postgres:alpine
         # Provide the password for postgres
         env:
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_PASSWORD:  ${{ secrets.POSTGRES_t_PASSWORD }}
           POSTGRES_USER: postgres
-#          POSTGRES_DB: test-db
+          POSTGRES_DB: testdb
           POSTGRES_PORT: 5432
         ports: ["5432:5432"]
         # Set health checks to wait until postgres has started
@@ -45,6 +45,6 @@ jobs:
         run: npm run test
         env:
           NODE_ENV: test
-          POSTGRES_URL: 'postgres://postgres:password@0.0.0.0:5432/postgres'
-          MONGO_URL: 'mongodb://mongodb:mongodb@0.0.0.0:27017/development'
+          POSTGRES_URL: ${{ secrets.POSTGRES_t_URL }}
+          MONGO_URL: ${{ secrets.MONGO_t_URL }}
 
