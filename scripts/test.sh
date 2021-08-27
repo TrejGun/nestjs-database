@@ -12,6 +12,6 @@ export MONGO_URL=$MONGO_URL
 
 lerna bootstrap --hoist
 
-lerna run lint --stream --parallel
+# lerna run lint --stream --parallel
 
 lerna exec -- npm run test
