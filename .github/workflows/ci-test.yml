@@ -36,7 +36,7 @@ jobs:
           ref: ${{ github.head_ref }}
 
       - name: Init mongodb
-        run: docker-compose -f ./apps/mongoose/docker-compose.yml up mongodb
+        run: docker-compose -f ./apps/mongoose/docker-compose.yml up -d mongodb
 
       - name: Install Packages
         run: npm i
