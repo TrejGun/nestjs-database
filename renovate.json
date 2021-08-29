@@ -1,6 +1,6 @@
 {
   "extends": ["github>gemunion/renovate-config"],
-  "baseBranches": ["master"],
+  "baseBranches": ["master", "prisma"],
   "timezone": "Asia/Singapore",
   "schedule": [
     "after 4am",
