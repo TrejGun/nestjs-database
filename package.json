@@ -15,7 +15,7 @@
     "node": ">=12.13"
   },
   "license": "MIT",
-  "name": "@trejgun/nestjs-auth",
+  "name": "@gemunion/nestjs-auth",
   "private": true,
   "repository": {
     "type": "git",
@@ -28,8 +28,5 @@
     "lint": "lerna run lint --stream --parallel",
     "test": "sh scripts/test.sh"
   },
-  "version": "0.0.1",
-  "workspaces": [
-    "apps/*"
-  ]
+  "version": "0.0.1"
 }

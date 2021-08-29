@@ -1,6 +1,6 @@
 import { NestFactory } from "@nestjs/core";
-import { ConfigService } from "@nestjs/config";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import { ConfigService } from "@nestjs/config";
 import { NestExpressApplication } from "@nestjs/platform-express";
 
 import { AppModule } from "./app.module";
@@ -10,11 +10,7 @@ async function bootstrap(): Promise<void> {
 
   const configService = app.get(ConfigService);
 
-  const options = new DocumentBuilder()
-    .setTitle("mongoose")
-    .setDescription("API description")
-    .setVersion("1.0")
-    .build();
+  const options = new DocumentBuilder().setTitle("prisma").setDescription("API description").setVersion("1.0").build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup("swagger", app, document);
 
