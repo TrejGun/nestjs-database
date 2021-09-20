@@ -28,7 +28,7 @@ export class DatabaseModule {
     private connection: Connection,
   ) {}
 
-  async configure(): Promise<void> {
+  public async configure(): Promise<void> {
     const umzug = new Umzug({
       migrations: { glob: "src/migrations/*.ts" },
       context: this.connection,

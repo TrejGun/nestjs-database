@@ -26,7 +26,7 @@ import mikroormconfig from "../mikro-orm.config";
 export class DatabaseModule {
   constructor(private readonly orm: MikroORM) {}
 
-  async configure(): Promise<void> {
+  public async configure(): Promise<void> {
     const migrator = this.orm.getMigrator();
     await migrator.up();
   }

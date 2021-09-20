@@ -35,7 +35,7 @@ export class DatabaseModule {
     private sequelize: Sequelize,
   ) {}
 
-  async configure(): Promise<void> {
+  public async configure(): Promise<void> {
     const umzug = new Umzug({
       migrations: { glob: "src/migrations/*.ts" },
       context: this.sequelize,
