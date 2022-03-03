@@ -17,8 +17,7 @@ export class TokenService {
 
   public findOne(where: FilterQuery<TokenEntity>): Promise<TokenEntity | null> {
     return this.tokenEntityRepository.findOne(where, {
-      // TODO fix me
-      // relations: ["user"]
+      populate: ["user"],
     });
   }
 
@@ -40,7 +39,7 @@ export class TokenService {
         user: userEntity,
       });
 
-      tokenEntity.id = await this.tokenEntityRepository.nativeInsert(tokenEntity);
+      await this.tokenEntityRepository.persistAndFlush(tokenEntity);
 
       return tokenEntity;
     }

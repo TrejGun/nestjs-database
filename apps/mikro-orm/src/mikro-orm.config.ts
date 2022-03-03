@@ -15,7 +15,7 @@ const config: Options = {
   migrations: {
     tableName: ns,
     path: "./src/migrations",
-    pattern: /^\d+-[\w-]+\.ts$/,
+    glob: "!(*.d).{js,ts}",
     transactional: true,
     allOrNothing: false,
   },

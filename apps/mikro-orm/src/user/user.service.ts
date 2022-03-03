@@ -6,7 +6,7 @@ import { FilterQuery } from "@mikro-orm/core";
 import { createHash } from "crypto";
 
 import { UserEntity } from "./user.entity";
-import { IUserCreateDto, UserStatus } from "./interfaces";
+import { IUserCreateDto, UserRole, UserStatus } from "./interfaces";
 import { IPasswordDto } from "../auth/interfaces";
 
 @Injectable()
@@ -41,10 +41,11 @@ export class UserService {
 
     userEntity = this.userEntityRepository.create({
       ...data,
+      roles: [UserRole.USER],
       password: this.createPasswordHash(data.password),
     });
 
-    userEntity.id = await this.userEntityRepository.nativeInsert(userEntity);
+    await this.userEntityRepository.persistAndFlush(userEntity);
 
     return userEntity;
   }

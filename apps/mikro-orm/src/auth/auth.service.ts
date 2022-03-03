@@ -46,12 +46,14 @@ export class AuthService {
     return this.loginUser(userEntity);
   }
 
-  public async logout(where: ILogoutDto): Promise<number> {
-    return this.authEntityRepository.nativeDelete({ ...where });
+  public async logout(dto: ILogoutDto): Promise<number> {
+    const { refreshToken } = dto;
+    return this.authEntityRepository.nativeDelete({ refreshToken });
   }
 
-  public async refresh(where: IRefreshDto): Promise<IJwt> {
-    const authEntity = await this.authEntityRepository.findOne({ ...where }, ["user"]);
+  public async refresh(dto: IRefreshDto): Promise<IJwt> {
+    const { refreshToken } = dto;
+    const authEntity = await this.authEntityRepository.findOne({ refreshToken }, { populate: ["user"] });
 
     if (!authEntity || authEntity.refreshTokenExpiresAt < new Date().getTime()) {
       throw new UnauthorizedException("refreshTokenHasExpired");
@@ -74,7 +76,7 @@ export class AuthService {
       refreshTokenExpiresAt: date.getTime() + refreshTokenExpiresIn * 1000,
     });
 
-    await this.authEntityRepository.nativeInsert(authEntity);
+    await this.authEntityRepository.persistAndFlush(authEntity);
 
     return {
       accessToken: this.jwtService.sign({ email: userEntity.email }, { expiresIn: accessTokenExpiresIn }),

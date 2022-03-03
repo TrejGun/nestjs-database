@@ -1,4 +1,4 @@
-import { Entity, PrimaryKey, Property, ManyToOne, EntityRepositoryType } from "@mikro-orm/core";
+import { Entity, EntityRepositoryType, ManyToOne, PrimaryKey, Property } from "@mikro-orm/core";
 
 import { UserEntity } from "../user/user.entity";
 import { ns } from "../common/constants";
@@ -21,8 +21,8 @@ export class AuthEntity {
   public user: UserEntity;
 
   @Property()
-  public createdAt = new Date();
+  public createdAt? = new Date();
 
   @Property({ onUpdate: () => new Date() })
-  public updatedAt = new Date();
+  public updatedAt? = new Date();
 }

@@ -20,12 +20,9 @@ export class TokenEntity {
   @ManyToOne()
   public user: UserEntity;
 
-  @Property({ type: "int" })
-  public userId: number;
-
   @Property()
-  public createdAt = new Date();
+  public createdAt? = new Date();
 
   @Property({ onUpdate: () => new Date() })
-  public updatedAt = new Date();
+  public updatedAt? = new Date();
 }

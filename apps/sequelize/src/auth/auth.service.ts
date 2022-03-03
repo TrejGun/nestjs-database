@@ -2,7 +2,6 @@ import { Injectable, NotFoundException, UnauthorizedException } from "@nestjs/co
 import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
 import { InjectModel } from "@nestjs/sequelize";
-import { WhereOptions } from "sequelize";
 import { v4 } from "uuid";
 
 import { UserService } from "../user/user.service";
@@ -10,6 +9,8 @@ import {
   IEmailVerificationDto,
   IForgotPasswordDto,
   ILoginDto,
+  ILogoutDto,
+  IRefreshDto,
   IResendEmailVerificationDto,
   IRestorePasswordDto,
 } from "./interfaces";
@@ -45,12 +46,14 @@ export class AuthService {
     return this.loginUser(userModel);
   }
 
-  public async logout(where: WhereOptions<AuthModel>): Promise<number> {
-    return this.authModel.destroy({ where: { ...where } });
+  public async logout(dto: ILogoutDto): Promise<number> {
+    const { refreshToken } = dto;
+    return this.authModel.destroy({ where: { refreshToken } });
   }
 
-  public async refresh(where: WhereOptions<AuthModel>): Promise<IJwt> {
-    const authModel = await this.authModel.findOne({ where, include: [AuthModel.associations.user] });
+  public async refresh(dto: IRefreshDto): Promise<IJwt> {
+    const { refreshToken } = dto;
+    const authModel = await this.authModel.findOne({ where: { refreshToken }, include: [AuthModel.associations.user] });
 
     if (!authModel || authModel.refreshTokenExpiresAt < new Date().getTime()) {
       throw new UnauthorizedException("refreshTokenHasExpired");

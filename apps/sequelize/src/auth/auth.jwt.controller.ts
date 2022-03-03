@@ -3,7 +3,6 @@ import { Body, ClassSerializerInterceptor, Controller, HttpCode, Post, UseInterc
 import { Public } from "../common/decorators";
 import { IJwt } from "../common/jwt";
 import { AuthService } from "./auth.service";
-import { UserService } from "../user/user.service";
 import {
   LogoutDto,
   RefreshDto,
@@ -18,7 +17,7 @@ import { UserCreateDto } from "../user/dto";
 @Public()
 @Controller("/auth")
 export class AuthJwtController {
-  constructor(private readonly authService: AuthService, private readonly userService: UserService) {}
+  constructor(private readonly authService: AuthService) {}
 
   @Post("/login")
   public login(@Body() data: LoginDto): Promise<IJwt> {
