@@ -23,7 +23,7 @@
     "rxjs": "7.5.5",
     "swagger-ui-express": "4.3.0",
     "typeorm": "0.2.45",
-    "typeorm-naming-strategies": "2.0.0",
+    "typeorm-naming-strategies": "4.0.0",
     "uuid": "8.3.2"
   },
   "devDependencies": {
