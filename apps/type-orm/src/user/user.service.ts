@@ -2,7 +2,7 @@ import { ConfigService } from "@nestjs/config";
 import { ConflictException, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { createHash } from "crypto";
-import { FindConditions, Repository } from "typeorm";
+import { FindOptionsWhere, Repository } from "typeorm";
 
 import { UserEntity } from "./user.entity";
 import { IUserCreateDto, UserRole, UserStatus } from "./interfaces";
@@ -16,7 +16,7 @@ export class UserService {
     private readonly configService: ConfigService,
   ) {}
 
-  public findOne(where: FindConditions<UserEntity>): Promise<UserEntity | undefined> {
+  public findOne(where: FindOptionsWhere<UserEntity>): Promise<UserEntity | null> {
     return this.userEntityRepository.findOne({ where });
   }
 
@@ -24,7 +24,7 @@ export class UserService {
     return this.userEntityRepository.findAndCount();
   }
 
-  public async getByCredentials(email: string, password: string): Promise<UserEntity | undefined> {
+  public async getByCredentials(email: string, password: string): Promise<UserEntity | null> {
     return this.userEntityRepository.findOne({
       where: {
         email,
