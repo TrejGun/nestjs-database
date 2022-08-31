@@ -9,6 +9,7 @@ import { ns } from "./common/constants";
 
 const config: Options = {
   type: "postgresql",
+  dbName: "development",
   entities: [UserEntity, AuthEntity, TokenEntity],
   baseDir: process.cwd(),
   namingStrategy: UnderscoreNamingStrategy,

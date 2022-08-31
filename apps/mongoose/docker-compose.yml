@@ -8,7 +8,7 @@ services:
     hostname: mongodb
     volumes:
       - ./init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
-      - ./data/:/data/
+      - ./data/mongo:/data/
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=root
