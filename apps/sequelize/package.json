@@ -29,7 +29,7 @@
     "sequelize-typescript": "2.1.5",
     "ts-node": "10.9.1",
     "umzug": "3.2.1",
-    "uuid": "8.3.2"
+    "uuid": "9.0.0"
   },
   "description": "api",
   "devDependencies": {
