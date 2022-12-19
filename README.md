@@ -1,3 +1,24 @@
+The nestjs-database repository contains a Nest.js module for connecting to a database and performing CRUD (create, read, update, delete) operations.
+The module provides a DatabaseModule that can be imported and configured with the desired database connection details.
+The module also exports a number of providers that can be used to inject a service for interacting with the database into other parts of the application.
+The DatabaseModule exports a number of providers that can be used to inject a service for interacting with the database into other parts of the application.
+The provided services includes:
+
+#### DatabaseService:
+This service provides methods for performing CRUD operations on the database, such as find, findOne, create, update, and delete.
+
+#### DatabaseConnectionService:
+This service provides methods for connecting to the database and closing the connection.
+
+#### DatabaseModule
+exports a **DatabaseModuleAsyncOptions** interface, which defines the options that can be passed to the module when it is imported.
+These options include the database connection details and the providers that should be registered with the module.
+
+To use the DatabaseModule, you will need to import it into your Nest.js application and configure it with the appropriate options.
+You can then inject the DatabaseService or DatabaseConnectionService into other parts of your application as needed to perform database operations.
+
+I hope this gives you a good overview of the code in the nestjs-database repository.
+
 ## Installation
 
 I assume you have node, yarn/npm and postgres/mongodb
