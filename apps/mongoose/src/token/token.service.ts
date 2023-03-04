@@ -38,7 +38,8 @@ export class TokenService {
     }
   }
 
-  public remove(tokenEntity: TokenDocument): Promise<TokenDocument> {
-    return tokenEntity.remove();
+  public remove(tokenEntity: TokenDocument): Promise<any> {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    return tokenEntity.deleteOne();
   }
 }
