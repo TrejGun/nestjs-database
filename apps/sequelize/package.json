@@ -22,7 +22,7 @@
     "passport-jwt": "4.0.1",
     "pg": "8.11.0",
     "reflect-metadata": "0.1.13",
-    "rimraf": "4.4.1",
+    "rimraf": "5.0.1",
     "rxjs": "7.8.1",
     "sequelize": "6.31.1",
     "sequelize-cli": "6.6.0",
