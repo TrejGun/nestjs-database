@@ -4,6 +4,7 @@
     "name": "TrejGun"
   },
   "dependencies": {
+    "@lerna/legacy-package-management": "7.1.5",
     "lerna": "6.6.2"
   },
   "devDependencies": {
