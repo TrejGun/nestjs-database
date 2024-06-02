@@ -30,7 +30,7 @@ export class TokenService {
 
     if (tokenEntity) {
       // update timestamps
-      await this.tokenEntityRepository.flush();
+      await this.tokenEntityRepository.getEntityManager().flush();
       return tokenEntity;
     } else {
       tokenEntity = this.tokenEntityRepository.create({
@@ -39,13 +39,13 @@ export class TokenService {
         user: userEntity,
       });
 
-      await this.tokenEntityRepository.persistAndFlush(tokenEntity);
+      await this.tokenEntityRepository.getEntityManager().persistAndFlush(tokenEntity);
 
       return tokenEntity;
     }
   }
 
   public remove(tokenEntity: TokenEntity): Promise<void> {
-    return this.tokenEntityRepository.remove(tokenEntity).flush();
+    return this.tokenEntityRepository.getEntityManager().remove(tokenEntity).flush();
   }
 }

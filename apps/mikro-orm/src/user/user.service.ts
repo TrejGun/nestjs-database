@@ -45,7 +45,7 @@ export class UserService {
       password: this.createPasswordHash(data.password),
     });
 
-    await this.userEntityRepository.persistAndFlush(userEntity);
+    await this.userEntityRepository.getEntityManager().persistAndFlush(userEntity);
 
     return userEntity;
   }
@@ -57,13 +57,13 @@ export class UserService {
 
   public async updatePassword(userEntity: UserEntity, dto: IPasswordDto): Promise<UserEntity> {
     userEntity.password = this.createPasswordHash(dto.password);
-    await this.userEntityRepository.flush();
+    await this.userEntityRepository.getEntityManager().flush();
     return userEntity;
   }
 
   public async activate(userEntity: UserEntity): Promise<UserEntity> {
     userEntity.status = UserStatus.ACTIVE;
-    await this.userEntityRepository.flush();
+    await this.userEntityRepository.getEntityManager().flush();
     return userEntity;
   }
 }

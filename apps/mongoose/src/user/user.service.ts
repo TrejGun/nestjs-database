@@ -22,7 +22,7 @@ export class UserService {
 
   public async findAndCount(where: FilterQuery<UserDocument> = {}): Promise<[Array<UserDocument>, number]> {
     const rows = await this.userModel.find(where);
-    const count = await this.userModel.count(where);
+    const count = await this.userModel.countDocuments(where);
     return [rows, count];
   }
 
