@@ -5,6 +5,7 @@
     "url": "https://github.com/gemunion"
   },
   "dependencies": {
+    "ajv": "^8.8.2",
     "@nestjs/common": "10.3.8",
     "@nestjs/config": "3.2.2",
     "@nestjs/core": "10.3.8",
