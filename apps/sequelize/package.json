@@ -30,7 +30,7 @@
     "sequelize-typescript": "2.1.6",
     "ts-node": "10.9.2",
     "umzug": "3.8.1",
-    "uuid": "9.0.1"
+    "uuid": "10.0.0"
   },
   "description": "api",
   "devDependencies": {
@@ -43,7 +43,7 @@
     "@types/passport": "1.0.16",
     "@types/passport-jwt": "4.0.1",
     "@types/sequelize": "4.28.20",
-    "@types/uuid": "9.0.8",
+    "@types/uuid": "10.0.0",
     "@typescript-eslint/eslint-plugin": "7.16.0",
     "@typescript-eslint/parser": "7.16.0",
     "eslint": "8.57.0",

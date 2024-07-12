@@ -26,7 +26,7 @@
     "rxjs": "7.8.1",
     "ts-node": "10.9.2",
     "umzug": "3.8.1",
-    "uuid": "9.0.1"
+    "uuid": "10.0.0"
   },
   "devDependencies": {
     "@nestjs/testing": "10.3.10",
@@ -37,7 +37,7 @@
     "@types/node": "20.14.10",
     "@types/passport": "1.0.16",
     "@types/passport-jwt": "4.0.1",
-    "@types/uuid": "9.0.8",
+    "@types/uuid": "10.0.0",
     "@typescript-eslint/eslint-plugin": "7.16.0",
     "@typescript-eslint/parser": "7.16.0",
     "eslint": "8.57.0",
