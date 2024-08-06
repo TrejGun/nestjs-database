@@ -41,9 +41,6 @@ jobs:
           compose-file: "./apps/mongoose/docker-compose.yml"
           services: mongodb
 
-#      - name: Init mongodb
-#        run: docker-compose -f ./apps/mongoose/docker-compose.yml up -d mongodb
-
       - name: Install Packages
         run: npm i
 
