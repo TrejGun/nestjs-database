@@ -36,7 +36,7 @@ jobs:
           ref: ${{ github.head_ref }}
 
       - name: Run docker-compose / Init mongodb
-        uses: hoverkraft-tech/compose-action@v2.0.1
+        uses: hoverkraft-tech/compose-action@v2.0.2
         with:
           compose-file: "./apps/mongoose/docker-compose.yml"
           services: mongodb
