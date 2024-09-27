@@ -11,23 +11,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        # Docker Hub image
-        image: postgres:alpine
-        # Provide the password for postgres
-        env:
-          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_t_PASSWORD }}
-          POSTGRES_USER: postgres
-          POSTGRES_DB: testdb
-          POSTGRES_PORT: 5432
-        ports: ["5432:5432"]
-        # Set health checks to wait until postgres has started
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
 
     steps:
       - name: checkout
@@ -38,8 +21,8 @@ jobs:
       - name: Run docker-compose / Init mongodb
         uses: hoverkraft-tech/compose-action@v2.0.2
         with:
-          compose-file: "./apps/mongoose/docker-compose.yml"
-          services: mongodb
+          compose-file: "./docker-compose.yml"
+          services: postgres mongodb
 
       - name: Install Packages
         run: npm i
