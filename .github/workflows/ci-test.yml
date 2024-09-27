@@ -22,7 +22,9 @@ jobs:
         uses: hoverkraft-tech/compose-action@v2.0.2
         with:
           compose-file: "./docker-compose.yml"
-          services: postgres mongodb
+          services: |
+            postgres 
+            mongodb
 
       - name: Install Packages
         run: npm i
