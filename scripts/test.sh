@@ -5,13 +5,10 @@ echo -e "\033[34mTesting...\n\033[0m";
 
 set -e # this will cause the shell to exit immediately if any command exits with a nonzero exit value.
 
-export NODE_ENV=$NODE_ENV
-export POSTGRES_URL=$POSTGRES_URL
-export MONGO_URL=$MONGO_URL
+export NODE_ENV=test
+export POSTGRES_URL=postgres://postgres:password@localhost/postgres
+export MONGO_URL=mongodb://mongodb:mongodb@localhost:27017/development
 
-
-lerna bootstrap --hoist
-
-# lerna run lint --stream --parallel
-
-lerna exec --stream -- npm run test -- --forceExit --runInBand --testTimeout=10000
+lerna bootstrap --hoist --ignore-scripts
+lerna run build --stream
+lerna run test --concurrency 1

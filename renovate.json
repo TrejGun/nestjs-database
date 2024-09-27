@@ -1,12 +1,9 @@
 {
-  "extends": ["github>gemunion/renovate-config"],
+  "extends": ["github>trejgun/renovate-config"],
   "baseBranches": ["master"],
   "packageRules": [
     {
-      "updateTypes": [
-        "minor",
-        "patch"
-      ],
+      "updateTypes": ["minor", "patch"],
       "automerge": true
     }
   ]

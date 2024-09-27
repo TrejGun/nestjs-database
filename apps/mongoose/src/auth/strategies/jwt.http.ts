@@ -9,7 +9,10 @@ import { UserStatus } from "../../user/interfaces";
 
 @Injectable()
 export class JwtHttpStrategy extends PassportStrategy(Strategy, "jwt-http") {
-  constructor(private readonly userService: UserService, private readonly configService: ConfigService) {
+  constructor(
+    private readonly userService: UserService,
+    private readonly configService: ConfigService,
+  ) {
     super({
       jwtFromRequest: ExtractJwt.fromExtractors([ExtractJwt.fromAuthHeaderAsBearerToken()]),
       ignoreExpiration: false,

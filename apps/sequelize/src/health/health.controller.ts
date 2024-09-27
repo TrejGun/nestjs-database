@@ -9,7 +9,10 @@ import {
 
 @Controller("/health")
 export class HealthController {
-  constructor(private readonly health: HealthCheckService, private readonly db: SequelizeHealthIndicator) {}
+  constructor(
+    private readonly health: HealthCheckService,
+    private readonly db: SequelizeHealthIndicator,
+  ) {}
 
   @Get()
   @HealthCheck()

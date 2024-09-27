@@ -29,7 +29,6 @@ export class TokenService {
       // update timestamps
       return tokenEntity.save();
     } else {
-      // eslint-disable-next-line new-cap
       return new this.tokenModel({
         code: randomBytes(3).toString("hex").toUpperCase(),
         type,

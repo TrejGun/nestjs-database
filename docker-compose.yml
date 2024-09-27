@@ -1,9 +1,8 @@
 version: "3"
 
 services:
-
   postgres:
-    container_name: postgres
+    container_name: postgres1
     image: postgres
     user: root
     ports:
@@ -13,41 +12,21 @@ services:
       POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
       POSTGRES_DB: "${POSTGRES_DB}"
     volumes:
-      - ./data/postgres:/var/lib/postgresql/data
+      - ${BASE_PATH}/data/postgres:/var/lib/postgresql/data
+      - ${BASE_PATH}/data/pgbckp:/pgbckp
 
-#  mssql:
-#    container_name: mssql
-#    image: mcr.microsoft.com/azure-sql-edge
-#    user: root
-#    command:
-#      - /bin/bash
-#      - -c
-#      - |
-#        /opt/mssql/bin/sqlservr &
-#        pid=$$!
-#
-#        echo "Waiting for MS SQL to be available ⏳"
-#        /opt/mssql-tools/bin/sqlcmd -l 30 -S localhost -h-1 -V1 -U sa -P $$SA_PASSWORD -Q "SET NOCOUNT ON SELECT \"YAY WE ARE UP\" , @@servername"
-#        is_up=$$?
-#        while [ $$is_up -ne 0 ] ; do
-#          echo -e $$(date)
-#          /opt/mssql-tools/bin/sqlcmd -l 30 -S localhost -h-1 -V1 -U sa -P $$SA_PASSWORD -Q "SET NOCOUNT ON SELECT \"YAY WE ARE UP\" , @@servername"
-#          is_up=$$?
-#          sleep 5
-#        done
-#
-#        for foo in /scripts/*.sql
-#          do /opt/mssql-tools/bin/sqlcmd -U sa -P $$SA_PASSWORD -l 30 -e -i $$foo
-#        done
-#        echo "All scripts have been executed. Waiting for MS SQL(pid $$pid) to terminate."
-#
-#        wait $$pid
-#    ports:
-#      - 1433:1433
-#    volumes:
-#      - /home/asu/mssql:/var/opt/mssql/data
-#      - ${BASE_PATH}/scripts/run-initialization.sh:/scripts/run-initialization.sh
-#      - ${BASE_PATH}/scripts/my_db_setup.sql:/scripts/my_db_setup.sql
-#    environment:
-#      ACCEPT_EULA: Y
-#      SA_PASSWORD: "${MAIN_DB_PASS}"
+  mongodb:
+    container_name: mongodb1
+    image: mongo
+    hostname: mongodb
+    volumes:
+      - ${BASE_PATH}/scripts/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
+      - ${BASE_PATH}/data/mongo:/data/
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "${MONGO_ROOT_USER}"
+      MONGO_INITDB_ROOT_PASSWORD: "${MONGO_ROOT_PASSWORD}"
+      MONGO_INITDB_DATABASE: "${MONGO_DB}"
+      MONGO_INITDB_USER: "${MONGO_USER}"
+      MONGO_INITDB_PWD: "${MONGO_PASSWORD}"
+    ports:
+      - 27017:27017

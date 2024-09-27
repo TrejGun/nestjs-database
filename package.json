@@ -8,12 +8,13 @@
     "lerna": "8.1.8"
   },
   "devDependencies": {
+    "@ethberry/eslint-config": "5.0.3",
     "husky": "4.3.8",
     "lint-staged": "15.2.10",
     "prettier": "3.3.3"
   },
   "engines": {
-    "node": ">=12.13"
+    "node": ">=20"
   },
   "license": "MIT",
   "name": "@trejgun/nestjs-database",
@@ -26,7 +27,8 @@
     "bootstrap": "lerna bootstrap --hoist",
     "build": "lerna run build --stream",
     "clean": "sh scripts/clean.sh",
-    "lint": "lerna run lint --stream --parallel",
+    "lint": "lerna run lint --concurrency 1",
+    "prettier": "prettier . --write",
     "test": "sh scripts/test.sh"
   },
   "version": "0.0.1"
