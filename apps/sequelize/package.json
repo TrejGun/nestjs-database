@@ -30,7 +30,7 @@
     "sequelize-typescript": "2.1.6",
     "ts-node": "10.9.2",
     "umzug": "3.8.2",
-    "uuid": "11.0.2"
+    "uuid": "11.0.3"
   },
   "description": "api",
   "devDependencies": {
@@ -46,7 +46,7 @@
     "jest": "29.7.0",
     "prettier": "3.3.3",
     "ts-jest": "29.2.5",
-    "tsc-watch": "6.2.0",
+    "tsc-watch": "6.2.1",
     "typescript": "5.6.3"
   },
   "engines": {
