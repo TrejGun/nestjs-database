@@ -7,6 +7,7 @@ import { CustomValidationPipe } from "./common/pipes";
 import { AuthModule } from "./auth/auth.module";
 import { UserModule } from "./user/user.module";
 import { DatabaseModule } from "./database/database.module";
+import { HealthModule } from "./health/health.module";
 
 @Module({
   providers: [
@@ -28,6 +29,7 @@ import { DatabaseModule } from "./database/database.module";
       envFilePath: ".env",
     }),
     DatabaseModule,
+    HealthModule,
     AuthModule,
     UserModule,
   ],
