@@ -4,8 +4,8 @@
     "name": "TrejGun"
   },
   "dependencies": {
-    "@lerna/legacy-package-management": "8.1.9",
-    "lerna": "8.1.9"
+    "@lerna/legacy-package-management": "8.2.0",
+    "lerna": "8.2.0"
   },
   "devDependencies": {
     "@ethberry/eslint-config": "5.0.4",
