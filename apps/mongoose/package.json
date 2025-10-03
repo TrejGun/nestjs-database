@@ -18,7 +18,7 @@
     "class-validator": "0.14.2",
     "dotenv": "17.2.3",
     "express": "5.1.0",
-    "mongoose": "8.18.3",
+    "mongoose": "8.19.0",
     "passport": "0.7.0",
     "passport-jwt": "4.0.1",
     "pg": "8.16.3",
@@ -33,14 +33,14 @@
     "@ethberry/cross-env": "0.0.5",
     "@types/express": "5.0.3",
     "@types/jest": "30.0.0",
-    "@types/node": "22.18.7",
+    "@types/node": "22.18.8",
     "@types/passport": "1.0.17",
     "@types/passport-jwt": "4.0.1",
     "jest": "30.2.0",
     "prettier": "3.6.2",
     "ts-jest": "29.4.4",
     "tsc-watch": "7.2.0",
-    "typescript": "5.9.2"
+    "typescript": "5.9.3"
   },
   "engines": {
     "node": ">=20"
