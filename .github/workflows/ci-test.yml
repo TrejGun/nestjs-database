@@ -19,12 +19,13 @@ jobs:
           ref: ${{ github.head_ref }}
 
       - name: Run docker-compose / Init mongodb
-        uses: hoverkraft-tech/compose-action@v2.2.0
+        uses: hoverkraft-tech/compose-action@v2.4.0
         with:
           compose-file: "./docker-compose.yml"
           services: |
-            postgres 
+            postgres
             mongodb
+          services-log-level: info
 
       - name: Install Packages
         run: npm i
