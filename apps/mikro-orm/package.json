@@ -5,11 +5,11 @@
     "url": "https://ethberry.io/"
   },
   "dependencies": {
-    "@mikro-orm/core": "6.6.0",
-    "@mikro-orm/migrations": "6.6.0",
+    "@mikro-orm/core": "6.6.1",
+    "@mikro-orm/migrations": "6.6.1",
     "@mikro-orm/nestjs": "6.1.1",
-    "@mikro-orm/postgresql": "6.6.0",
-    "@mikro-orm/reflection": "6.6.0",
+    "@mikro-orm/postgresql": "6.6.1",
+    "@mikro-orm/reflection": "6.6.1",
     "@mikro-orm/sql-highlighter": "1.0.1",
     "@nestjs/common": "11.1.9",
     "@nestjs/config": "4.0.2",
@@ -20,7 +20,7 @@
     "@nestjs/swagger": "11.2.3",
     "@nestjs/terminus": "11.0.0",
     "class-transformer": "0.5.1",
-    "class-validator": "0.14.2",
+    "class-validator": "0.14.3",
     "dotenv": "17.2.3",
     "express": "5.1.0",
     "passport": "0.7.0",
@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@ethberry/cross-env": "0.0.5",
-    "@mikro-orm/cli": "6.6.0",
+    "@mikro-orm/cli": "6.6.1",
     "@nestjs/testing": "11.1.9",
     "@types/express": "5.0.5",
     "@types/jest": "30.0.0",
@@ -40,7 +40,7 @@
     "@types/passport": "1.0.17",
     "@types/passport-jwt": "4.0.1",
     "jest": "30.2.0",
-    "prettier": "3.6.2",
+    "prettier": "3.7.2",
     "ts-jest": "29.4.5",
     "tsc-watch": "7.2.0",
     "typescript": "5.9.3"
