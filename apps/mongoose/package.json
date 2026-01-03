@@ -18,7 +18,7 @@
     "class-validator": "0.14.3",
     "dotenv": "17.2.3",
     "express": "5.2.1",
-    "mongoose": "8.20.4",
+    "mongoose": "8.21.0",
     "passport": "0.7.0",
     "passport-jwt": "4.0.1",
     "pg": "8.16.3",
