@@ -5,11 +5,11 @@
     "url": "https://ethberry.io/"
   },
   "dependencies": {
-    "@mikro-orm/core": "6.6.5",
-    "@mikro-orm/migrations": "6.6.5",
+    "@mikro-orm/core": "6.6.6",
+    "@mikro-orm/migrations": "6.6.6",
     "@mikro-orm/nestjs": "6.1.1",
-    "@mikro-orm/postgresql": "6.6.5",
-    "@mikro-orm/reflection": "6.6.5",
+    "@mikro-orm/postgresql": "6.6.6",
+    "@mikro-orm/reflection": "6.6.6",
     "@mikro-orm/sql-highlighter": "1.0.1",
     "@nestjs/common": "11.1.12",
     "@nestjs/config": "4.0.2",
@@ -25,14 +25,14 @@
     "express": "5.2.1",
     "passport": "0.7.0",
     "passport-jwt": "4.0.1",
-    "pg": "8.17.2",
+    "pg": "8.18.0",
     "rxjs": "7.8.2",
     "ts-node": "10.9.2",
     "uuid": "13.0.0"
   },
   "devDependencies": {
     "@ethberry/cross-env": "0.0.5",
-    "@mikro-orm/cli": "6.6.5",
+    "@mikro-orm/cli": "6.6.6",
     "@nestjs/testing": "11.1.12",
     "@types/express": "5.0.6",
     "@types/jest": "30.0.0",
