@@ -1,4 +1,5 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
+
 import { ns } from "../common/constants";
 
 export class CreateAuthTable1572880566396 implements MigrationInterface {

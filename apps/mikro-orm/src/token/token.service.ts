@@ -1,12 +1,13 @@
 import { randomBytes } from "crypto";
+
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@mikro-orm/nestjs";
 import { FilterQuery } from "@mikro-orm/core";
+import { EntityRepository } from "@mikro-orm/postgresql";
 
 import { TokenEntity } from "./token.entity";
 import { UserEntity } from "../user/user.entity";
 import { TokenType } from "./interfaces";
-import { EntityRepository } from "@mikro-orm/postgresql";
 
 @Injectable()
 export class TokenService {
@@ -22,7 +23,6 @@ export class TokenService {
   }
 
   public async getToken(type: TokenType, userEntity: UserEntity): Promise<TokenEntity> {
-    // working around https://github.com/typeorm/typeorm/issues/1090
     let tokenEntity = await this.tokenEntityRepository.findOne({
       type,
       user: userEntity,

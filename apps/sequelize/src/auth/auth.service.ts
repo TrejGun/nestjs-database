@@ -19,7 +19,6 @@ import { IJwt } from "../common/jwt";
 import { UserModel } from "../user/user.model";
 import { EmailService } from "../email/email.service";
 import { TokenService } from "../token/token.service";
-
 import { IUserCreateDto, UserStatus } from "../user/interfaces";
 import { TokenType } from "../token/interfaces";
 import { EmailType } from "../email/interfaces";

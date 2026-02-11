@@ -1,4 +1,5 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
+
 import { ns } from "../common/constants";
 
 export class SeedUserTable1563804021014 implements MigrationInterface {

@@ -1,9 +1,9 @@
 import { BelongsTo, Column, Model, Table } from "sequelize-typescript";
+import { DataTypes, Sequelize } from "sequelize";
 
 import { IToken, TokenType } from "./interfaces";
 import { ns } from "../common/constants";
 import { UserModel } from "../user/user.model";
-import { DataTypes, Sequelize } from "sequelize";
 
 @Table({
   schema: ns,

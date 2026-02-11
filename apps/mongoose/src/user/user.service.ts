@@ -1,8 +1,9 @@
+import { createHash } from "crypto";
+
 import { Injectable, ConflictException } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { InjectModel } from "@nestjs/mongoose";
 import { FilterQuery, Model } from "mongoose";
-import { createHash } from "crypto";
 
 import { UserModel, UserDocument } from "./user.model";
 import { IUserCreateDto, UserStatus } from "./interfaces";

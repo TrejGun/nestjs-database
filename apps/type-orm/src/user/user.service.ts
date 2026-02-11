@@ -1,7 +1,8 @@
+import { createHash } from "crypto";
+
 import { ConfigService } from "@nestjs/config";
 import { ConflictException, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { createHash } from "crypto";
 import { FindOptionsWhere, Repository } from "typeorm";
 
 import { UserEntity } from "./user.entity";

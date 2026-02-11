@@ -1,11 +1,12 @@
 {
-  "moduleFileExtensions": ["js", "json", "ts"],
-  "rootDir": "src",
-  "testRegex": ".spec.ts$",
-  "transform": {
-    "^.+\\.(t|j)s$": "ts-jest"
-  },
-  "transformIgnorePatterns": ["node_modules/(?!(uuid)/)"],
   "coverageDirectory": "../coverage",
-  "testEnvironment": "node"
+  "moduleFileExtensions": ["js", "jsx", "ts", "tsx", "json"],
+  "preset": "ts-jest",
+  "rootDir": "src",
+  "testMatch": ["**/*.spec.ts"],
+  "verbose": true,
+  "transform": {
+    "^.+\\.[tj]sx?$": ["ts-jest", { "useESM": true }]
+  },
+  "transformIgnorePatterns": ["node_modules/(?!(uuid)/)"]
 }

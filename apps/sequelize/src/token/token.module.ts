@@ -1,8 +1,8 @@
 import { Module } from "@nestjs/common";
+import { SequelizeModule } from "@nestjs/sequelize";
 
 import { TokenService } from "./token.service";
 import { TokenModel } from "./token.model";
-import { SequelizeModule } from "@nestjs/sequelize";
 
 @Module({
   imports: [SequelizeModule.forFeature([TokenModel])],

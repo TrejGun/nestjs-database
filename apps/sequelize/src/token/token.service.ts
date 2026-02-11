@@ -1,8 +1,9 @@
 import { randomBytes } from "crypto";
+
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
-
 import { WhereOptions } from "sequelize";
+
 import { TokenModel } from "./token.model";
 import { TokenType } from "./interfaces";
 import { UserModel } from "../user/user.model";

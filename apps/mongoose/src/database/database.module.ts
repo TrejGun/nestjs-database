@@ -5,8 +5,8 @@ import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { InjectConnection, MongooseModule } from "@nestjs/mongoose";
 import { Connection } from "mongoose";
-
 import { MongoDBStorage, Umzug } from "umzug";
+
 import { ns } from "../common/constants";
 
 @Module({

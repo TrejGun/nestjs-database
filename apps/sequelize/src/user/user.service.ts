@@ -1,8 +1,9 @@
+import { createHash } from "crypto";
+
 import { ConflictException, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { ConfigService } from "@nestjs/config";
 import { WhereOptions } from "sequelize";
-import { createHash } from "crypto";
 
 import { UserModel } from "./user.model";
 import { IUser, IUserCreateDto, UserStatus } from "./interfaces";
