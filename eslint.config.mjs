@@ -3,7 +3,7 @@ import jestRules from "@ethberry/eslint-config/tests/jest.mjs";
 
 export default [
   {
-    ignores: ["**/dist"],
+    ignores: ["**/dist", "**/supabase.types.ts"],
   },
 
   {
