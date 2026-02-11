@@ -1,0 +1,68 @@
+{
+  "author": {
+    "email": "trejgun+opensource@gmail.com",
+    "name": "TrejGun",
+    "url": "https://ethberry.io/"
+  },
+  "dependencies": {
+    "@nestjs/common": "11.1.13",
+    "@nestjs/config": "4.0.3",
+    "@nestjs/core": "11.1.13",
+    "@nestjs/jwt": "11.0.2",
+    "@nestjs/passport": "11.0.5",
+    "@nestjs/platform-express": "11.1.13",
+    "@nestjs/swagger": "11.2.6",
+    "@prisma/client": "6.5.0",
+    "class-transformer": "0.5.1",
+    "class-validator": "0.14.3",
+    "dotenv": "17.2.4",
+    "express": "5.2.1",
+    "passport": "0.7.0",
+    "passport-jwt": "4.0.1",
+    "pg": "8.18.0",
+    "rxjs": "7.8.2",
+    "uuid": "13.0.0"
+  },
+  "devDependencies": {
+    "@nestjs/testing": "11.1.13",
+    "@ethberry/cross-env": "0.0.5",
+    "@types/express": "5.0.6",
+    "@types/jest": "30.0.0",
+    "@types/node": "22.19.9",
+    "@types/passport": "1.0.17",
+    "@types/passport-jwt": "4.0.1",
+    "jest": "30.2.0",
+    "prettier": "3.8.1",
+    "prisma": "6.5.0",
+    "ts-jest": "29.4.6",
+    "ts-node": "10.9.2",
+    "tsc-watch": "7.2.0",
+    "typescript": "5.9.3"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "name": "@trejgun/prisma",
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/trejgun/nestjs-database"
+  },
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "eslint . --fix",
+    "prebuild": "rm -rf dist/",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prod": "cross-env NODE_ENV=${NODE_ENV:=production} node .",
+    "start": "cross-env NODE_ENV=${NODE_ENV:=development} tsc-watch --onSuccess \"node .\" --onFailure \"echo Compilation Failed\"",
+    "test": "cross-env NODE_ENV=${NODE_ENV:=test} jest --detectOpenHandles --forceExit --runInBand --testTimeout=10000"
+  },
+  "title": "Prisma for Nest.js",
+  "version": "0.0.1"
+}

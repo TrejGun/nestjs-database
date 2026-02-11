@@ -1,34 +1,33 @@
-// this is needed by umzug to run *.ts migrations
-import "ts-node/register";
-
+import { DynamicModule, Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
-import { Module } from "@nestjs/common";
-import { MikroORM } from "@mikro-orm/core";
 import { MikroOrmModule } from "@mikro-orm/nestjs";
+import { MikroOrmModuleOptions } from "@mikro-orm/nestjs/typings";
 import { PostgreSqlDriver } from "@mikro-orm/postgresql";
 
-import mikroormconfig from "../mikro-orm.config";
+import { MikroOrmMigrationProvider } from "./migration.provider";
 
-@Module({
-  imports: [
-    MikroOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      driver: PostgreSqlDriver,
-      useFactory: (configService: ConfigService) => {
-        return {
-          ...mikroormconfig,
-          clientUrl: configService.get<string>("POSTGRES_URL", "postgres://postgres:password@localhost/postgres"),
-        };
-      },
-    }),
-  ],
-})
+@Module({})
 export class DatabaseModule {
-  constructor(private readonly orm: MikroORM) {}
+  static forRootAsync(options: MikroOrmModuleOptions): DynamicModule {
+    const { contextName, ...rest } = options;
 
-  public async configure(): Promise<void> {
-    const migrator = this.orm.getMigrator();
-    await migrator.up();
+    return {
+      module: DatabaseModule,
+      imports: [
+        MikroOrmModule.forRootAsync({
+          contextName,
+          imports: [ConfigModule],
+          inject: [ConfigService],
+          driver: PostgreSqlDriver,
+          useFactory: (configService: ConfigService): MikroOrmModuleOptions => {
+            return {
+              ...rest,
+              clientUrl: configService.get<string>("POSTGRES_URL", "postgres://postgres:password@localhost/postgres"),
+            };
+          },
+        }),
+      ],
+      providers: [MikroOrmMigrationProvider],
+    };
   }
 }

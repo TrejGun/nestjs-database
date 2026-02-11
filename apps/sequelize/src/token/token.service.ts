@@ -18,17 +18,16 @@ export class TokenService {
   public findOne(where: WhereOptions<TokenModel>): Promise<TokenModel | null> {
     return this.tokenModel.findOne({
       where,
-      // TODO fixme
-      // relations: ["user"],
+      include: [UserModel],
     });
   }
 
-  public async getToken(type: TokenType, _userEntity: UserModel): Promise<TokenModel> {
-    // working around https://github.com/typeorm/typeorm/issues/1090
+  public async getToken(type: TokenType, userEntity: UserModel): Promise<TokenModel> {
     const tokenEntity = await this.tokenModel.findOne({
-      type,
-      // TODO fixme
-      // user: userEntity,
+      where: {
+        type,
+        userId: userEntity.id,
+      } as any,
     });
 
     if (tokenEntity) {
@@ -39,9 +38,8 @@ export class TokenService {
         .build({
           code: randomBytes(3).toString("hex").toUpperCase(),
           type,
-          // TODO fix me
-          // user: userEntity,
-        })
+          userId: userEntity.id,
+        } as any)
         .save();
     }
   }

@@ -34,5 +34,9 @@ This file captures project conventions and workflows for humans and AI agents.
 
 ## Tests
 - Backend tests use Jest with `*.spec.ts` (see `apps/mikro-orm`).
+- Tests use a real database connection (no mocking)
+- Tests that create data must clean up after themselves (delete all records in `afterAll`).
 - Seeding in tests uses seed module/service; this is an exception to the single service point rule for model actions.
+- Seed module/service naming convention: `{Entity}SeedModule` / `{Entity}SeedService` (e.g., `UserSeedModule`, `UserSeedService`).
+- Seed module/service should be placed in the same folder as the tests that use them.
 - Run server tests: `npm run --prefix ./app/mikro-orm test`

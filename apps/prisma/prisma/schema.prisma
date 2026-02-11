@@ -1,0 +1,73 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["multiSchema"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_URL")
+  schemas  = ["prisma"]
+}
+
+enum UserRole {
+  ADMIN
+  USER
+
+  @@schema("prisma")
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  PENDING
+
+  @@schema("prisma")
+}
+
+enum TokenType {
+  EMAIL
+  PASSWORD
+
+  @@schema("prisma")
+}
+
+model User {
+  id        Int        @id @default(autoincrement())
+  firstName String     @map("first_name")
+  lastName  String     @map("last_name")
+  email     String     @unique
+  password  String
+  roles     UserRole[] @default([USER])
+  status    UserStatus @default(PENDING)
+  auths     Auth[]
+  tokens    Token[]
+
+  @@map("user")
+  @@schema("prisma")
+}
+
+model Auth {
+  id                    Int      @id @default(autoincrement())
+  refreshToken          String   @map("refresh_token")
+  refreshTokenExpiresAt BigInt   @map("refresh_token_expires_at")
+  userId                Int      @map("user_id")
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt             DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt             DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  @@map("auth")
+  @@schema("prisma")
+}
+
+model Token {
+  id        Int       @id @default(autoincrement())
+  code      String
+  type      TokenType
+  userId    Int       @map("user_id")
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime  @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  @@map("token")
+  @@schema("prisma")
+}

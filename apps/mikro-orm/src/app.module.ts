@@ -8,6 +8,7 @@ import { AuthModule } from "./auth/auth.module";
 import { UserModule } from "./user/user.module";
 import { DatabaseModule } from "./database/database.module";
 import { HealthModule } from "./health/health.module";
+import mikroormconfig from "./mikro-orm.config";
 
 @Module({
   providers: [
@@ -28,7 +29,7 @@ import { HealthModule } from "./health/health.module";
     ConfigModule.forRoot({
       envFilePath: ".env",
     }),
-    DatabaseModule,
+    DatabaseModule.forRootAsync(mikroormconfig),
     HealthModule,
     AuthModule,
     UserModule,

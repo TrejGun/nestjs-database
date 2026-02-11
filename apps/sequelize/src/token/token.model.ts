@@ -1,4 +1,4 @@
-import { BelongsTo, Column, Model, Table } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, Model, Table } from "sequelize-typescript";
 import { DataTypes, Sequelize } from "sequelize";
 
 import { IToken, TokenType } from "./interfaces";
@@ -28,6 +28,11 @@ export class TokenModel extends Model<IToken> implements IToken {
     targetKey: "id",
   })
   public readonly user: UserModel;
+
+  @Column({
+    type: DataType.INTEGER,
+  })
+  public userId: number;
 
   @Column({
     allowNull: false,
