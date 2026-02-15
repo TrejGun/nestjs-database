@@ -4,7 +4,7 @@
     "name": "TrejGun"
   },
   "dependencies": {
-    "lerna": "8.2.4"
+    "lerna": "9.0.4"
   },
   "devDependencies": {
     "@ethberry/eslint-config": "5.0.9",
