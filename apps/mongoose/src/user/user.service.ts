@@ -3,7 +3,7 @@ import { createHash } from "crypto";
 import { Injectable, ConflictException } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { InjectModel } from "@nestjs/mongoose";
-import { FilterQuery, Model } from "mongoose";
+import { QueryFilter, Model } from "mongoose";
 
 import { UserModel, UserDocument } from "./user.model";
 import { IUserCreateDto, UserStatus } from "./interfaces";
@@ -17,11 +17,11 @@ export class UserService {
     private readonly configService: ConfigService,
   ) {}
 
-  public findOne(where: FilterQuery<UserDocument>): Promise<UserDocument | null> {
+  public findOne(where: QueryFilter<UserDocument>): Promise<UserDocument | null> {
     return this.userModel.findOne(where).exec();
   }
 
-  public async findAndCount(where: FilterQuery<UserDocument> = {}): Promise<[Array<UserDocument>, number]> {
+  public async findAndCount(where: QueryFilter<UserDocument> = {}): Promise<[Array<UserDocument>, number]> {
     const rows = await this.userModel.find(where);
     const count = await this.userModel.countDocuments(where);
     return [rows, count];

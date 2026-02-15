@@ -2,7 +2,7 @@ import { Injectable, NotFoundException, UnauthorizedException } from "@nestjs/co
 import { JwtService } from "@nestjs/jwt";
 import { ConfigService } from "@nestjs/config";
 import { InjectModel } from "@nestjs/mongoose";
-import { FilterQuery, Model } from "mongoose";
+import { QueryFilter, Model } from "mongoose";
 import { v4 } from "uuid";
 
 import { IJwt } from "../common/jwt";
@@ -44,11 +44,11 @@ export class AuthService {
     return this.loginUser(userEntity);
   }
 
-  public async logout(where: FilterQuery<AuthDocument>): Promise<any> {
+  public async logout(where: QueryFilter<AuthDocument>): Promise<any> {
     return this.authModel.deleteOne(where);
   }
 
-  public async refresh(where: FilterQuery<AuthDocument>): Promise<IJwt> {
+  public async refresh(where: QueryFilter<AuthDocument>): Promise<IJwt> {
     const authEntity = await this.authModel.findOne(where, {}, { populate: "user" });
 
     if (!authEntity || authEntity.refreshTokenExpiresAt < new Date().getTime()) {

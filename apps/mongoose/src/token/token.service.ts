@@ -2,7 +2,7 @@ import { randomBytes } from "crypto";
 
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
-import { FilterQuery, Model } from "mongoose";
+import { QueryFilter, Model } from "mongoose";
 
 import { TokenDocument, TokenModel } from "./token.model";
 import { UserDocument } from "../user/user.model";
@@ -15,7 +15,7 @@ export class TokenService {
     private tokenModel: Model<TokenDocument>,
   ) {}
 
-  public findOne(where: FilterQuery<TokenDocument>): Promise<TokenDocument | null> {
+  public findOne(where: QueryFilter<TokenDocument>): Promise<TokenDocument | null> {
     return this.tokenModel.findOne(where, {}, { populate: "user" }).exec();
   }
 
