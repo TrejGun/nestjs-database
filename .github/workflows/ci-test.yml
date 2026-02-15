@@ -13,12 +13,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: checkout
-        uses: actions/checkout@v6
-        with:
-          ref: ${{ github.head_ref }}
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Run docker-compose / Init mongodb
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+
+      - name: Start databases
         uses: hoverkraft-tech/compose-action@v2.5.0
         with:
           compose-file: "./docker-compose.yml"
@@ -27,12 +30,14 @@ jobs:
             mongodb
           services-log-level: info
 
-      - name: Install Packages
+      - name: Install packages
         run: npm i
 
-      - name: Npm run test
-        run: npm run test
+      - name: Setup Prisma
+        working-directory: apps/prisma
+        run: npx prisma generate && npx prisma db push
+
+      - name: Run tests
+        run: npm run test -w apps/mikro-orm -w apps/mongoose -w apps/sequelize -w apps/type-orm -w apps/prisma
         env:
           NODE_ENV: test
-          POSTGRES_URL: ${{ secrets.POSTGRES_t_URL }}
-          MONGO_URL: ${{ secrets.MONGO_t_URL }}
