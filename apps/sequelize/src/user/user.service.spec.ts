@@ -27,6 +27,8 @@ describe("UserService", () => {
       providers: [UserService],
     }).compile();
 
+    await testModule.init();
+
     service = testModule.get<UserService>(UserService);
     seedService = testModule.get<UserSeedService>(UserSeedService);
 

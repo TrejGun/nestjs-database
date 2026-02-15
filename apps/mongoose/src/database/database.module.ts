@@ -1,7 +1,7 @@
 // this is needed by umzug to run *.ts migrations
 import "ts-node/register";
 
-import { Module } from "@nestjs/common";
+import { Module, OnModuleInit } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { InjectConnection, MongooseModule } from "@nestjs/mongoose";
 import { Connection } from "mongoose";
@@ -22,13 +22,13 @@ import { ns } from "../common/constants";
     }),
   ],
 })
-export class DatabaseModule {
+export class DatabaseModule implements OnModuleInit {
   constructor(
     @InjectConnection()
     private connection: Connection,
   ) {}
 
-  public async configure(): Promise<void> {
+  public async onModuleInit(): Promise<void> {
     const umzug = new Umzug({
       migrations: { glob: "src/migrations/*.ts" },
       context: this.connection,

@@ -45,6 +45,8 @@ describe("AuthService", () => {
       providers: [AuthService, JwtHttpStrategy],
     }).compile();
 
+    await testModule.init();
+
     service = testModule.get<AuthService>(AuthService);
     seedService = testModule.get<UserSeedService>(UserSeedService);
 
