@@ -20,7 +20,9 @@ export class TokenModel extends Model<IToken> implements IToken {
   @Column
   public code: string;
 
-  @Column
+  @Column({
+    type: DataTypes.ENUM(...Object.values(TokenType)),
+  })
   public type: TokenType;
 
   @BelongsTo(() => UserModel, {

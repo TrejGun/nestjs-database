@@ -9,7 +9,7 @@ export class TokenModel implements IToken {
   @Prop()
   public code: string;
 
-  @Prop()
+  @Prop({ type: String, enum: TokenType })
   public type: TokenType;
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: "UserModel" })

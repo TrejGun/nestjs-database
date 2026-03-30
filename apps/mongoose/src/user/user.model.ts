@@ -20,10 +20,10 @@ export class UserModel implements IUser {
   @Prop()
   public password: string;
 
-  @Prop()
+  @Prop({ type: [String], enum: UserRole })
   public roles: Array<UserRole>;
 
-  @Prop()
+  @Prop({ type: String, enum: UserStatus })
   public status: UserStatus;
 
   @Prop()
