@@ -1,5 +1,5 @@
 import { Controller, Get } from "@nestjs/common";
-import { User as UserType } from "@prisma/client";
+import type { User as UserType } from "@prisma/client";
 
 import { Roles, User } from "../common/decorators";
 import { UserRole } from "./interfaces";

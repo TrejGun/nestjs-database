@@ -1,7 +1,7 @@
 import { Controller, Get } from "@nestjs/common";
 
 import { Roles, User } from "../common/decorators";
-import { Tables } from "../database/supabase.types";
+import type { Tables } from "../database/supabase.types";
 import { UserRole } from "./interfaces";
 import { UserService } from "./user.service";
 
