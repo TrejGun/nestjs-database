@@ -76,7 +76,8 @@ export class AuthService {
       refreshTokenExpiresAt: date.getTime() + refreshTokenExpiresIn * 1000,
     });
 
-    await this.authEntityRepository.getEntityManager().persistAndFlush(authEntity);
+    this.authEntityRepository.getEntityManager().persist(authEntity);
+    await this.authEntityRepository.getEntityManager().flush();
 
     return {
       accessToken: this.jwtService.sign({ email: userEntity.email }, { expiresIn: accessTokenExpiresIn }),

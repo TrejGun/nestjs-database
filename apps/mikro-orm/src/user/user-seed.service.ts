@@ -25,7 +25,8 @@ export class UserSeedService {
         status: UserStatus.ACTIVE,
       });
 
-      await em.persistAndFlush(userEntity);
+      em.persist(userEntity);
+      await em.flush();
     }
 
     return userEntity;

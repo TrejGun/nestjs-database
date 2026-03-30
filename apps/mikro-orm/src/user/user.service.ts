@@ -46,7 +46,8 @@ export class UserService {
       password: this.createPasswordHash(data.password),
     });
 
-    await this.userEntityRepository.getEntityManager().persistAndFlush(userEntity);
+    this.userEntityRepository.getEntityManager().persist(userEntity);
+    await this.userEntityRepository.getEntityManager().flush();
 
     return userEntity;
   }

@@ -6,8 +6,9 @@
   },
   "dependencies": {
     "@mikro-orm/core": "7.0.6",
+    "@mikro-orm/decorators": "7.0.6",
     "@mikro-orm/migrations": "7.0.6",
-    "@mikro-orm/nestjs": "6.1.2",
+    "@mikro-orm/nestjs": "7.0.1",
     "@mikro-orm/postgresql": "7.0.6",
     "@mikro-orm/reflection": "7.0.6",
     "@mikro-orm/sql-highlighter": "1.0.1",
@@ -69,7 +70,7 @@
     "prebuild": "rm -rf dist/",
     "prod": "cross-env NODE_ENV=${NODE_ENV:=production} node .",
     "start": "cross-env NODE_ENV=${NODE_ENV:=development} tsc-watch --onSuccess \"node .\" --onFailure \"echo Compilation Failed\"",
-    "test": "cross-env NODE_ENV=${NODE_ENV:=test} jest --detectOpenHandles --forceExit --runInBand --testTimeout=10000"
+    "test": "cross-env NODE_ENV=${NODE_ENV:=test} NODE_OPTIONS=--experimental-vm-modules jest --detectOpenHandles --forceExit --runInBand --testTimeout=10000"
   },
   "title": "MikroOrm for Nest.js",
   "version": "0.0.1"

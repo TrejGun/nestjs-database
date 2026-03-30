@@ -39,7 +39,8 @@ export class TokenService {
         user: userEntity,
       });
 
-      await this.tokenEntityRepository.getEntityManager().persistAndFlush(tokenEntity);
+      this.tokenEntityRepository.getEntityManager().persist(tokenEntity);
+      await this.tokenEntityRepository.getEntityManager().flush();
 
       return tokenEntity;
     }
