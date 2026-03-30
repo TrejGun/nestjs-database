@@ -5,7 +5,6 @@ import { ConfigService } from "@nestjs/config";
 
 import { Tables } from "../../database/supabase.types";
 import { UserService } from "../../user/user.service";
-import { UserStatus } from "../../user/interfaces";
 
 @Injectable()
 export class JwtHttpStrategy extends PassportStrategy(Strategy, "jwt-http") {
@@ -27,7 +26,7 @@ export class JwtHttpStrategy extends PassportStrategy(Strategy, "jwt-http") {
       throw new UnauthorizedException();
     }
 
-    if (userEntity.status !== UserStatus.ACTIVE) {
+    if (userEntity.status !== "ACTIVE") {
       throw new UnauthorizedException("userNotActive");
     }
 

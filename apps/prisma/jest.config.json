@@ -7,6 +7,5 @@
   "verbose": true,
   "transform": {
     "^.+\\.[tj]sx?$": ["ts-jest", { "useESM": true }]
-  },
-  "transformIgnorePatterns": ["node_modules/(?!(uuid)/)"]
+  }
 }

@@ -25,5 +25,5 @@
     "strictPropertyInitialization": false,
     "target": "es2017"
   },
-  "exclude": ["node_modules", "dist", "prisma"]
+  "exclude": ["node_modules", "dist", "prisma", "prisma.config.ts"]
 }

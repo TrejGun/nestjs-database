@@ -29,8 +29,7 @@
     "sequelize-cli": "6.6.5",
     "sequelize-typescript": "2.1.6",
     "ts-node": "10.9.2",
-    "umzug": "3.8.2",
-    "uuid": "13.0.0"
+    "umzug": "3.8.2"
   },
   "description": "api",
   "devDependencies": {

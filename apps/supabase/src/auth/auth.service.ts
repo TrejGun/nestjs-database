@@ -1,8 +1,9 @@
+import { randomUUID } from "crypto";
+
 import { Inject, Injectable, NotFoundException, UnauthorizedException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { ConfigService } from "@nestjs/config";
 import { SupabaseClient } from "@supabase/supabase-js";
-import { v4 } from "uuid";
 
 import { SUPABASE_PROVIDER } from "../database/database.provider";
 import { Database, Tables } from "../database/supabase.types";
@@ -67,7 +68,7 @@ export class AuthService {
   }
 
   public async loginUser(userEntity: Tables<"user">): Promise<IJwt> {
-    const refreshToken = v4();
+    const refreshToken = randomUUID();
     const date = new Date();
 
     // it is actually a string
@@ -120,6 +121,7 @@ export class AuthService {
       return;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
     if (userEntity.status !== UserStatus.ACTIVE) {
       throw new UnauthorizedException("userIsNotActive");
     }

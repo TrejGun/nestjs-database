@@ -1,8 +1,9 @@
+import { randomUUID } from "crypto";
+
 import { Injectable, NotFoundException, UnauthorizedException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { ConfigService } from "@nestjs/config";
 import { User } from "@prisma/client";
-import { v4 } from "uuid";
 
 import { PrismaService } from "../database/prisma.service";
 import {
@@ -63,7 +64,7 @@ export class AuthService {
   }
 
   public async loginUser(userEntity: User): Promise<IJwt> {
-    const refreshToken = v4();
+    const refreshToken = randomUUID();
     const date = new Date();
 
     // it is actually a string
@@ -115,6 +116,7 @@ export class AuthService {
       return;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison
     if (userEntity.status !== UserStatus.ACTIVE) {
       throw new UnauthorizedException("userIsNotActive");
     }

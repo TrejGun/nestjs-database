@@ -25,6 +25,7 @@ import { TokenModel } from "../token/token.model";
         password: configService.get<string>("POSTGRES_PASSWORD", "password"),
         database: configService.get<string>("POSTGRES_DB", "secondconnect"),
         models: [UserModel, AuthModel, TokenModel],
+        logging: false,
       }),
     }),
   ],

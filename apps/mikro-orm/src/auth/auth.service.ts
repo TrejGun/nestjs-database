@@ -1,9 +1,10 @@
+import { randomUUID } from "crypto";
+
 import { Injectable, NotFoundException, UnauthorizedException } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { ConfigService } from "@nestjs/config";
 import { InjectRepository } from "@mikro-orm/nestjs";
 import { EntityRepository } from "@mikro-orm/postgresql";
-import { v4 } from "uuid";
 
 import { IJwt } from "../common/jwt";
 import { UserService } from "../user/user.service";
@@ -63,7 +64,7 @@ export class AuthService {
   }
 
   public async loginUser(userEntity: UserEntity): Promise<IJwt> {
-    const refreshToken = v4();
+    const refreshToken = randomUUID();
     const date = new Date();
 
     // it is actually a string
