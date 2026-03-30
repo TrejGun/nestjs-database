@@ -1,4 +1,5 @@
-import { Entity, EntityRepositoryType, Enum, PrimaryKey, Property } from "@mikro-orm/core";
+import { EntityRepositoryType } from "@mikro-orm/core";
+import { Entity, Enum, PrimaryKey, Property } from "@mikro-orm/decorators/legacy";
 
 import { ns } from "../common/constants";
 import { IUser, UserRole, UserStatus } from "./interfaces";

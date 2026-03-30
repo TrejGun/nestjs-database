@@ -1,12 +1,19 @@
 {
   "coverageDirectory": "../coverage",
   "moduleFileExtensions": ["js", "jsx", "ts", "tsx", "json"],
-  "preset": "ts-jest",
+  "preset": "ts-jest/presets/default-esm",
   "rootDir": "src",
   "testMatch": ["**/*.spec.ts"],
   "verbose": true,
+  "extensionsToTreatAsEsm": [".ts"],
   "transform": {
-    "^.+\\.[tj]sx?$": ["ts-jest", { "useESM": true }]
+    "^.+\\.(ts|tsx)$": [
+      "ts-jest",
+      {
+        "useESM": true,
+        "tsconfig": { "module": "ESNext", "moduleResolution": "Bundler", "isolatedModules": true }
+      }
+    ]
   },
   "transformIgnorePatterns": ["node_modules/(?!(uuid)/)"]
 }
