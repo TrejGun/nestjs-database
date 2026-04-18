@@ -22,7 +22,7 @@ jobs:
           node-version-file: ".nvmrc"
 
       - name: Start databases
-        uses: hoverkraft-tech/compose-action@v2.5.0
+        uses: hoverkraft-tech/compose-action@v2.6.0
         with:
           compose-file: "./docker-compose.yml"
           services: |
