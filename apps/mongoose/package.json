@@ -18,14 +18,14 @@
     "class-validator": "0.15.1",
     "dotenv": "17.4.2",
     "express": "5.2.1",
-    "mongoose": "9.4.1",
+    "mongoose": "9.6.1",
     "passport": "0.7.0",
     "passport-jwt": "4.0.1",
     "pg": "8.20.0",
     "reflect-metadata": "0.2.2",
     "rxjs": "7.8.2",
     "ts-node": "10.9.2",
-    "umzug": "3.8.2"
+    "umzug": "3.8.3"
   },
   "devDependencies": {
     "@nestjs/testing": "11.1.19",
