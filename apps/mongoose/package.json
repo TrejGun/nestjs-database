@@ -21,7 +21,7 @@
     "mongoose": "9.6.2",
     "passport": "0.7.0",
     "passport-jwt": "4.0.1",
-    "pg": "8.20.0",
+    "pg": "8.21.0",
     "reflect-metadata": "0.2.2",
     "rxjs": "7.8.2",
     "ts-node": "10.9.2",
@@ -37,7 +37,7 @@
     "@types/passport-jwt": "4.0.1",
     "jest": "30.4.2",
     "prettier": "3.8.3",
-    "ts-jest": "29.4.9",
+    "ts-jest": "29.4.11",
     "tsc-watch": "7.2.0",
     "typescript": "5.9.3"
   },
