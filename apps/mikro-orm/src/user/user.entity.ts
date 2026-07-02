@@ -3,7 +3,6 @@ import { Entity, Enum, PrimaryKey, Property } from "@mikro-orm/decorators/legacy
 
 import { ns } from "../common/constants";
 import { IUser, UserRole, UserStatus } from "./interfaces";
-import { NativeEnumArrayType } from "../database/native.enum";
 
 @Entity({ collection: `${ns}.user` })
 export class UserEntity {
@@ -24,9 +23,13 @@ export class UserEntity {
   @Property({ columnType: "varchar", hidden: true })
   public password?: string;
 
-  // @Enum({ items: () => UserRole, array: true, default: [UserRole.USER] })
-  @Property({ type: NativeEnumArrayType })
-  public roles: Array<UserRole>;
+  @Enum({
+    items: () => UserRole,
+    array: true,
+    default: [UserRole.USER],
+    nativeEnumName: `${ns}.user_role_enum`,
+  })
+  public roles: UserRole[];
 
   @Enum({
     items: () => UserStatus,
