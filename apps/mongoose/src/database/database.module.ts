@@ -4,6 +4,7 @@ import "ts-node/register";
 import { Module, OnModuleInit } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { InjectConnection, MongooseModule } from "@nestjs/mongoose";
+import * as os from "node:os";
 import { Connection } from "mongoose";
 import { MongoDBStorage, Umzug } from "umzug";
 
@@ -17,6 +18,9 @@ import { ns } from "../common/constants";
       useFactory: (configService: ConfigService) => {
         return {
           uri: configService.get<string>("MONGO_URL", "mongodb://localhost:27017"),
+          // mongodb 7.6 loads `os` via import(); Jest ESM swallows that and the
+          // handshake is sent without the required `driver` metadata field.
+          runtimeAdapters: { os },
         };
       },
     }),

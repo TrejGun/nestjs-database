@@ -26,12 +26,14 @@ services:
 
   mongodb:
     container_name: mongodb
-    image: mongo:latest
+    image: mongo:8.0.4
     hostname: mongodb
     volumes:
       - ${BASE_PATH}/scripts/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh:ro
       - mongo_data:/data/db
     environment:
+      # Avoid TCMalloc/rseq crash on Linux 6.19–7.0.13 (SERVER-121912).
+      GLIBC_TUNABLES: glibc.pthread.rseq=1
       MONGO_INITDB_ROOT_USERNAME: "${MONGO_ROOT_USER}"
       MONGO_INITDB_ROOT_PASSWORD: "${MONGO_ROOT_PASSWORD}"
       MONGO_INITDB_DATABASE: "${MONGO_DB}"
